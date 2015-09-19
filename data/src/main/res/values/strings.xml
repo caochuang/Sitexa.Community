@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">data</string>
+    <string name="network_tips">当前网络不可用，请检查您的网络!</string>
+</resources>

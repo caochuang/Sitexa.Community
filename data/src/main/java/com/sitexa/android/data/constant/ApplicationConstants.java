@@ -15,7 +15,7 @@ public final class ApplicationConstants {
     /**
      * api地址
      */
-    public final static String API_DOMAIN = "http://192.168.0.100:8080";
+    public final static String API_DOMAIN = "http://192.168.0.100:8080/sitexa-api";
     /**
      * 图片前缀
      */

@@ -19,9 +19,9 @@ import android.content.Context;
 
 import com.sitexa.android.data.cache.UserCache;
 import com.sitexa.android.data.entity.mapper.UserEntityJsonMapper;
+import com.sitexa.android.data.net.UserApiImpl;
 import com.sitexa.android.data.net.UserApi;
-import com.sitexa.android.data.net.UserRestApi;
-import com.sitexa.android.data.net.UserRestApiImpl;
+//import com.sitexa.android.data.net.UserRestApiImpl;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -65,8 +65,8 @@ public class UserDataStoreFactory {
     public UserDataStore createCloudDataStore() {
         UserEntityJsonMapper userEntityJsonMapper = new UserEntityJsonMapper();
         //UserRestApi userRestApi = new UserRestApiImpl(this.context, userEntityJsonMapper);
-        UserRestApi userRestApi = new UserApi(this.context, userEntityJsonMapper);
+        UserApi userApi = new UserApiImpl(this.context, userEntityJsonMapper);
 
-        return new CloudUserDataStore(userRestApi, this.userCache);
+        return new CloudUserDataStore(userApi, this.userCache);
     }
 }

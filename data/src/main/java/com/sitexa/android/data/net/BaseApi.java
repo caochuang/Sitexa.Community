@@ -29,9 +29,9 @@ import java.util.Map;
 import rx.Observable;
 import rx.Subscriber;
 
-public class BaseRequest {
+public class BaseApi {
 
-    protected static String TAG = "BaseRequest";
+    protected static String TAG = "[BaseApi]";
 
     protected RequestQueue requestQueue;
 
@@ -41,8 +41,8 @@ public class BaseRequest {
 
     protected Context context;
 
-    public BaseRequest(Context context) {
-        this.context = context;
+    public BaseApi(Context context) {
+        this.context = context.getApplicationContext();
         this.requestQueue = Volley.newRequestQueue(context);
     }
 
@@ -149,7 +149,7 @@ public class BaseRequest {
                     @Override
                     public void call(Subscriber<? super ApiResult> subscriber) {
 
-                        if (checkNetwork && !checkNetwork()) {
+                        if (checkNetwork && !isThereInternetConnection()) {
                             subscriber.onError(new NetworkConnectionException(CodeConstants.ApiCode.NETWORK_ERROR + ":" + "Network connection error"));
                         } else {
                             try {
@@ -243,7 +243,7 @@ public class BaseRequest {
                     @Override
                     public void call(Subscriber<? super ApiResult> subscriber) {
 
-                        if (checkNetwork && !checkNetwork()) {
+                        if (checkNetwork && !isThereInternetConnection()) {
                             subscriber.onError(new NetworkConnectionException(CodeConstants.ApiCode.NETWORK_ERROR + ":" + "Network connection error"));
                         } else {
 
@@ -412,7 +412,7 @@ public class BaseRequest {
      *
      * @return
      */
-    private boolean checkNetwork() {
+    private boolean isThereInternetConnection() {
         ConnectivityManager connectivityManager =
                 (ConnectivityManager) this.context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();

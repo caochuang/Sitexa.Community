@@ -1,46 +1,50 @@
+/**
+ * Copyright (C) 2015 Fernando Cejas Open Source Project
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.sitexa.android.data.net;
 
-import android.content.Context;
-
-import com.google.gson.reflect.TypeToken;
 import com.sitexa.android.data.entity.UserEntity;
-import com.sitexa.android.data.entity.mapper.UserEntityJsonMapper;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import rx.Observable;
 
 /**
- * Created by xnpeng on 15-9-16.
+ * RestApi for retrieving data from the network.
  */
-public class UserApi extends BaseRequest implements UserRestApi {
+public interface UserApi {
+    //static final String API_BASE_URL = "http://www.android10.org/myapi/";
+    //static final String API_BASE_URL = "http://192.168.0.100:8080/";
 
-    private final UserEntityJsonMapper userEntityJsonMapper;
+    /** Api url for getting all users */
+    //static final String API_URL_GET_USER_LIST = API_BASE_URL + "users.json";
+    String API_URL_GET_USER_LIST = "/user/getUserList";
 
-    public UserApi(Context context, UserEntityJsonMapper userEntityJsonMapper) {
-        super(context);
-        if (context == null || userEntityJsonMapper == null) {
-            throw new IllegalArgumentException("The constructor parameters cannot be null!!!");
-        }
-        this.userEntityJsonMapper = userEntityJsonMapper;
-    }
+    /** Api url for getting a user profile: Remember to concatenate id + 'json' */
+    //static final String API_URL_GET_USER_DETAILS = API_BASE_URL + "user_";
+    String API_URL_GET_USER_DETAILS = "/user/findUserById?userId=";
 
-    @Override
-    public Observable<List<UserEntity>> userEntityList() {
-        String url = UserRestApi.API_URL_GET_USER_LIST;
-        Map<String,String> params = new HashMap<>();
-        params.put("pageNumber","0");
-        params.put("pageSize", "20");
-        return this.get(url,params).map(apiResult -> apiResult.getDomainList(new TypeToken<List<UserEntity>>() { }.getType()));
-    }
+    /**
+     * Retrieves an {@link Observable} which will emit a List of {@link UserEntity}.
+     */
+    Observable<List<UserEntity>> userEntityList();
 
-    @Override
-    public Observable<UserEntity> userEntityById(long userId) {
-        String url = UserRestApi.API_URL_GET_USER_DETAILS;
-        Map<String,String> params = new HashMap<>();
-        params.put("userId",String.valueOf(userId));
-        return this.get(url,params).map(apiResult -> apiResult.getDomain(UserEntity.class));
-    }
+    /**
+     * Retrieves an {@link Observable} which will emit a {@link UserEntity}.
+     *
+     * @param userId The user id used to get user data.
+     */
+    Observable<UserEntity> userEntityById(final long userId);
 }

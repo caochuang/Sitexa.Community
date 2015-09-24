@@ -46,34 +46,40 @@ public class UserModelDataMapper {
         if (user == null) {
             throw new IllegalArgumentException("Cannot transform a null value");
         }
-        UserModel userModel = new UserModel(user.getUserId());
-        userModel.setAuditFlag(user.isAuditFlag());
-        userModel.setBirthday(user.getBirthday());
-        userModel.setCommunityID(user.getCommunityId());
-        userModel.setCommunityName(user.getCommunityName());
-        userModel.setCoverImagePath(user.getCoverImagePath());
-        userModel.setDeleteFlag(user.isDeleteFlag());
-        userModel.setEmail(user.getEmail());
-        userModel.setEncryptedLoginStr(user.getEncryptedLoginStr());
-        userModel.setEncryptKey(user.getEncryptKey());
-        userModel.setGender(user.getGender());
-        userModel.setHeadIcon(user.getHeadIcon());
-        userModel.setIMEI(user.getIMEI());
-        userModel.setMobileNo(user.getMobileNo());
-        userModel.setPassword(user.getPassword());
-        userModel.setQQNo(user.getQqno());
-        userModel.setQRCode(user.getQrcode());
-        userModel.setQRCodePath(user.getQrcodePath());
-        userModel.setRegisterDate(user.getRegisterDate());
-        userModel.setRole(user.getRole());
-        userModel.setSignature(user.getSignature());
-        userModel.setSiteID(user.getSiteId());
-        userModel.setSiteName(user.getSiteName());
-        userModel.setStatus(user.getStatus());
-        userModel.setUsername(user.getUserName());
-        userModel.setWeiboNo(user.getWeiboNo());
-        userModel.setWeixinNo(user.getWeixinNo());
-        return userModel;
+        try {
+
+            UserModel userModel = new UserModel(user.getUserId());
+            userModel.setAuditFlag(user.isAuditFlag());
+            userModel.setBirthday(user.getBirthday());
+            userModel.setCommunityID(user.getCommunityId());
+            userModel.setCommunityName(user.getCommunityName());
+            userModel.setCoverImagePath(user.getCoverImagePath());
+            userModel.setDeleteFlag(user.isDeleteFlag());
+            userModel.setEmail(user.getEmail());
+            userModel.setEncryptedLoginStr(user.getEncryptedLoginStr());
+            userModel.setEncryptKey(user.getEncryptKey());
+            userModel.setGender(user.getGender());
+            userModel.setHeadIcon(user.getHeadIcon());
+            userModel.setIMEI(user.getIMEI());
+            userModel.setMobileNo(user.getMobileNo());
+            userModel.setPassword(user.getPassword());
+            userModel.setQQNo(user.getQqno());
+            userModel.setQRCode(user.getQrcode());
+            userModel.setQRCodePath(user.getQrcodePath());
+            userModel.setRegisterDate(user.getRegisterDate());
+            userModel.setRole(user.getRole());
+            userModel.setSignature(user.getSignature());
+            userModel.setSiteID(user.getSiteId());
+            userModel.setSiteName(user.getSiteName());
+            userModel.setStatus(user.getStatus());
+            userModel.setUsername(user.getUserName());
+            userModel.setWeiboNo(user.getWeiboNo());
+            userModel.setWeixinNo(user.getWeixinNo());
+            return userModel;
+
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     /**

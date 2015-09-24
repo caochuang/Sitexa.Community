@@ -17,16 +17,16 @@ package com.sitexa.android.community.presenter;
 
 import android.support.annotation.NonNull;
 
-import com.sitexa.android.domain.User;
-import com.sitexa.android.domain.exception.DefaultErrorBundle;
-import com.sitexa.android.domain.exception.ErrorBundle;
-import com.sitexa.android.domain.interactor.DefaultSubscriber;
-import com.sitexa.android.domain.interactor.UseCase;
 import com.sitexa.android.community.exception.ErrorMessageFactory;
 import com.sitexa.android.community.internal.di.PerActivity;
 import com.sitexa.android.community.mapper.UserModelDataMapper;
 import com.sitexa.android.community.model.UserModel;
 import com.sitexa.android.community.view.UserListView;
+import com.sitexa.android.domain.User;
+import com.sitexa.android.domain.exception.DefaultErrorBundle;
+import com.sitexa.android.domain.exception.ErrorBundle;
+import com.sitexa.android.domain.interactor.DefaultSubscriber;
+import com.sitexa.android.domain.interactor.UseCase;
 
 import java.util.Collection;
 import java.util.List;

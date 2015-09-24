@@ -71,7 +71,7 @@ public class UserDetailsPresenter implements Presenter {
     /**
      * Initializes the presenter by start retrieving user details.
      */
-    public void initialize(int userId) {
+    public void initialize(long userId) {
         this.userId = userId;
         this.loadUserDetails();
     }

@@ -5,6 +5,7 @@
  */
 package com.sitexa.android.community.view.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -38,6 +39,7 @@ public class UserListFragment extends BaseFragment implements UserListView {
 
     @Inject
     UserListPresenter userListPresenter;
+
     @Bind(R.id.rv_users)
     RecyclerView rv_users;
     @Bind(R.id.rl_progress)
@@ -46,9 +48,12 @@ public class UserListFragment extends BaseFragment implements UserListView {
     RelativeLayout rl_retry;
     @Bind(R.id.bt_retry)
     Button bt_retry;
+
     private UsersAdapter usersAdapter;
     private UsersLayoutManager usersLayoutManager;
+
     private UserListListener userListListener;
+
     private UsersAdapter.OnItemClickListener onItemClickListener =
             new UsersAdapter.OnItemClickListener() {
                 @Override
@@ -64,7 +69,7 @@ public class UserListFragment extends BaseFragment implements UserListView {
     }
 
     @Override
-    public void onAttach(Context activity) {
+    public void onAttach(Activity activity) {
         super.onAttach(activity);
         if (activity instanceof UserListListener) {
             this.userListListener = (UserListListener) activity;
@@ -158,6 +163,7 @@ public class UserListFragment extends BaseFragment implements UserListView {
 
     @Override
     public void viewUser(UserModel userModel) {
+        //todo....check this point,debug why userListListener = null
         if (this.userListListener != null) {
             this.userListListener.onUserClicked(userModel);
         }
@@ -191,4 +197,5 @@ public class UserListFragment extends BaseFragment implements UserListView {
     public interface UserListListener {
         void onUserClicked(final UserModel userModel);
     }
+
 }

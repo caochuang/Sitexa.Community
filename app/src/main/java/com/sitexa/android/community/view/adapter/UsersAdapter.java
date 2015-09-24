@@ -26,8 +26,13 @@ import butterknife.ButterKnife;
  */
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder> {
 
-    private final LayoutInflater layoutInflater;
+    public interface OnItemClickListener {
+        void onUserItemClicked(UserModel userModel);
+    }
+
     private List<UserModel> usersCollection;
+    private final LayoutInflater layoutInflater;
+
     private OnItemClickListener onItemClickListener;
 
     public UsersAdapter(Context context, Collection<UserModel> usersCollection) {
@@ -82,10 +87,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         if (usersCollection == null) {
             throw new IllegalArgumentException("The list cannot be null");
         }
-    }
-
-    public interface OnItemClickListener {
-        void onUserItemClicked(UserModel userModel);
     }
 
     static class UserViewHolder extends RecyclerView.ViewHolder {

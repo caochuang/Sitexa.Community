@@ -8,7 +8,6 @@ package com.sitexa.android.community.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 
 import com.sitexa.android.community.R;
@@ -35,7 +34,6 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate");
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_user_list);
 
@@ -47,7 +45,6 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
                 .build();
-        Log.d(TAG, "initializeInjector");
     }
 
     @Override

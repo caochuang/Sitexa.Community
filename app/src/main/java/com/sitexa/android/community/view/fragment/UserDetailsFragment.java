@@ -33,8 +33,10 @@ import butterknife.OnClick;
 public class UserDetailsFragment extends BaseFragment implements UserDetailsView {
 
     private static final String ARGUMENT_KEY_USER_ID = "org.android.ARGUMENT_USER_ID";
+
     @Inject
     UserDetailsPresenter userDetailsPresenter;
+
     @Bind(R.id.iv_cover)
     AutoLoadImageView iv_cover;
     @Bind(R.id.tv_fullname)
@@ -51,7 +53,8 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
     RelativeLayout rl_retry;
     @Bind(R.id.bt_retry)
     Button bt_retry;
-    private int userId;
+
+    private long userId;
 
     public UserDetailsFragment() {
         super();
@@ -110,8 +113,9 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
     private void initialize() {
         this.getComponent(UserComponent.class).inject(this);
         this.userDetailsPresenter.setView(this);
-        this.userId = getArguments().getInt(ARGUMENT_KEY_USER_ID);
+        this.userId = getArguments().getLong(ARGUMENT_KEY_USER_ID);
         this.userDetailsPresenter.initialize(this.userId);
+
     }
 
     @Override

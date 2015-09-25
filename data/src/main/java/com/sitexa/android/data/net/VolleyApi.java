@@ -29,7 +29,7 @@ import java.util.Map;
 import rx.Observable;
 import rx.Subscriber;
 
-public class BaseApi {
+public class VolleyApi {
 
     protected static String TAG = "[BaseApi]";
 
@@ -41,9 +41,9 @@ public class BaseApi {
 
     protected Context context;
 
-    public BaseApi(Context context) {
+    public VolleyApi(Context context) {
         this.context = context.getApplicationContext();
-        this.requestQueue = Volley.newRequestQueue(context);
+        this.requestQueue = Volley.newRequestQueue(this.context);
     }
 
 

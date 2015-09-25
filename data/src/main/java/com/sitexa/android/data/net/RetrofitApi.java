@@ -13,7 +13,7 @@ import rx.Observable;
 /**
  * Created by xnpeng on 15-9-24.
  */
-public class NetworkApi {
+public class RetrofitApi {
 
     private final String baseUrl = ApplicationConstants.API_DOMAIN;
 

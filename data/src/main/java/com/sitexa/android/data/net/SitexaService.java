@@ -13,6 +13,7 @@ import rx.Observable;
 
 /**
  * Created by xnpeng on 15-9-24.
+ * Accompany with RetrofitApi
  */
 public interface SitexaService {
 
@@ -47,7 +48,5 @@ public interface SitexaService {
     interface SpaceService{}
 
     interface BlogService{}
-
-
 
 }

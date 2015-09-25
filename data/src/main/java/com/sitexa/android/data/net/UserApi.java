@@ -26,7 +26,6 @@ import rx.Observable;
  */
 public interface UserApi {
     //static final String API_BASE_URL = "http://www.android10.org/myapi/";
-    //static final String API_BASE_URL = "http://192.168.0.100:8080/";
 
     /** Api url for getting all users */
     //static final String API_URL_GET_USER_LIST = API_BASE_URL + "users.json";

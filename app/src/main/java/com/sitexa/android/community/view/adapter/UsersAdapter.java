@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.sitexa.android.community.R;
 import com.sitexa.android.community.model.UserModel;
+import com.sitexa.android.community.view.component.AutoLoadImageView;
 
 import java.util.Collection;
 import java.util.List;
@@ -58,6 +59,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     public void onBindViewHolder(UserViewHolder holder, final int position) {
         final UserModel userModel = this.usersCollection.get(position);
         holder.textViewTitle.setText(userModel.getUsername());
+        holder.imageHeadIcon.setImageUrl(userModel.getHeadIcon());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +94,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     static class UserViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.title)
         TextView textViewTitle;
+
+        @Bind(R.id.avatar)
+        AutoLoadImageView imageHeadIcon;
 
         public UserViewHolder(View itemView) {
             super(itemView);

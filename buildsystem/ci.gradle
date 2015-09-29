@@ -1,6 +1,5 @@
 def ciServer = 'TRAVIS'
 def executingOnCI = "true".equals(System.getenv(ciServer))
-
 // Since for CI we always do full clean builds, we don't want to pre-dex
 // See http://tools.android.com/tech-docs/new-build-system/tips
 subprojects {

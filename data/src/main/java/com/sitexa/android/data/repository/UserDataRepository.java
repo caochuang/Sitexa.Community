@@ -64,7 +64,7 @@ public class UserDataRepository implements UserRepository {
 
     @SuppressWarnings("Convert2MethodRef")
     @Override
-    public Observable<User> user(int userId) {
+    public Observable<User> user(long userId) {
         final UserDataStore userDataStore = this.userDataStoreFactory.create(userId);
         return userDataStore.userEntityDetails(userId)
                 .map(userEntity -> this.userEntityDataMapper.transform(userEntity));

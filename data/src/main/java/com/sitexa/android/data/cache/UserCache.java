@@ -28,7 +28,7 @@ public interface UserCache {
      *
      * @param userId The user id to retrieve data.
      */
-    Observable<UserEntity> get(final int userId);
+    Observable<UserEntity> get(final long userId);
 
     /**
      * Puts and element into the cache.
@@ -43,7 +43,7 @@ public interface UserCache {
      * @param userId The id used to look for inside the cache.
      * @return true if the element is cached, otherwise false.
      */
-    boolean isCached(final int userId);
+    boolean isCached(final long userId);
 
     /**
      * Checks if the cache is expired.

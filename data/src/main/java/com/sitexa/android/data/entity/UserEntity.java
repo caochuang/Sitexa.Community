@@ -26,7 +26,7 @@ import java.util.Date;
 public class UserEntity {
 
     @SerializedName("userid")
-    private int userId;
+    private long userId;
 
     @SerializedName("username")
     private String username;
@@ -110,11 +110,11 @@ public class UserEntity {
         //empty
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 

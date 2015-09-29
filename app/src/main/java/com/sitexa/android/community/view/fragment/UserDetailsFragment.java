@@ -56,17 +56,17 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
     @Bind(R.id.bt_retry)
     Button bt_retry;
 
-    private int userId;
+    private long userId;
 
     public UserDetailsFragment() {
         super();
     }
 
-    public static UserDetailsFragment newInstance(int userId) {
+    public static UserDetailsFragment newInstance(long userId) {
         UserDetailsFragment userDetailsFragment = new UserDetailsFragment();
 
         Bundle argumentsBundle = new Bundle();
-        argumentsBundle.putInt(ARGUMENT_KEY_USER_ID, userId);
+        argumentsBundle.putLong(ARGUMENT_KEY_USER_ID, userId);
         userDetailsFragment.setArguments(argumentsBundle);
 
         return userDetailsFragment;
@@ -115,7 +115,7 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
     private void initialize() {
         this.getComponent(UserComponent.class).inject(this);
         this.userDetailsPresenter.setView(this);
-        this.userId = getArguments().getInt(ARGUMENT_KEY_USER_ID);
+        this.userId = getArguments().getLong(ARGUMENT_KEY_USER_ID);
         this.userDetailsPresenter.initialize(this.userId);
     }
 

@@ -69,7 +69,7 @@ public class UserCacheImpl implements UserCache {
     }
 
     @Override
-    public synchronized Observable<UserEntity> get(final int userId) {
+    public synchronized Observable<UserEntity> get(final long userId) {
         return Observable.create(new Observable.OnSubscribe<UserEntity>() {
             @Override
             public void call(Subscriber<? super UserEntity> subscriber) {
@@ -101,7 +101,7 @@ public class UserCacheImpl implements UserCache {
     }
 
     @Override
-    public boolean isCached(int userId) {
+    public boolean isCached(long userId) {
         File userEntitiyFile = this.buildFile(userId);
         return this.fileManager.exists(userEntitiyFile);
     }
@@ -131,7 +131,7 @@ public class UserCacheImpl implements UserCache {
      * @param userId The id user to build the file.
      * @return A valid file.
      */
-    private File buildFile(int userId) {
+    private File buildFile(long userId) {
         StringBuilder fileNameBuilder = new StringBuilder();
         fileNameBuilder.append(this.cacheDir.getPath());
         fileNameBuilder.append(File.separator);

@@ -46,7 +46,7 @@ public class UserDataStoreFactory {
     /**
      * Create {@link UserDataStore} from a user id.
      */
-    public UserDataStore create(int userId) {
+    public UserDataStore create(long userId) {
         UserDataStore userDataStore;
 
         if (!this.userCache.isExpired() && this.userCache.isCached(userId)) {

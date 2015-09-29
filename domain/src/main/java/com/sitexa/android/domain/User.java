@@ -26,7 +26,7 @@ public class User {
 
     //显示数据拼音的首字母
     private String sortletters;
-    private int userId;
+    private long userId;
     private String mobileNo;
     private String userName;
     private String email;
@@ -58,7 +58,7 @@ public class User {
     private String IMEI;
     private String Password;
 
-    public User(int userId) {
+    public User(long userId) {
         this.userId = userId;
     }
 
@@ -70,7 +70,7 @@ public class User {
         this.sortletters = sortletters;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 

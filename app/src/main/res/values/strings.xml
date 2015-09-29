@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Sitexa Community App</string>
+  <string name="app_name">Sitexa Community</string>
   <string name="url">http://www.sitexa.org/</string>
 
   <string name="activity_title_user_list">Users List</string>

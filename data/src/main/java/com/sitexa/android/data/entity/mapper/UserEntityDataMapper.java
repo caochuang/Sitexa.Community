@@ -20,6 +20,7 @@ import com.sitexa.android.domain.User;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -45,28 +46,34 @@ public class UserEntityDataMapper {
     public User transform(UserEntity entity) {
         User user = null;
         if (entity != null) {
-            user = new User(entity.getId());
-            user.setUserName(entity.getUsername());
-            user.setAuditFlag(entity.isAuditFlag());
-            user.setBirthday(entity.getBirthday());
-            user.setCoverImagePath(entity.getCoverImagePath());
-            user.setDeleteFlag(entity.isDeleteFlag());
-            user.setEmail(entity.getEmail());
-            user.setEncryptedLoginStr(entity.getEncryptedLoginStr());
-            user.setGender(entity.getGender());
-            user.setMobileNo(entity.getMobileNo());
-            user.setQqno(entity.getQqno());
-            user.setQrcode(entity.getQrcode());
-            user.setQrcodePath(entity.getQrcodePath());
-            user.setRegisterDate(entity.getRegisterDate());
-            user.setRole(entity.getRole());
-            user.setSignature(entity.getSignature());
-            user.setSiteId(entity.getSiteId());
-            user.setStatus(entity.getStatus());
-            user.setWeiboNo(entity.getWeiboNo());
-            user.setWeixinNo(entity.getWeixinNo());
-            user.setCommunityId(entity.getCommunityId());
-            user.setCommunityName(entity.getCommunityName());
+            try {
+                user = new User(entity.getUserId());
+                user.setUserName(entity.getUsername());
+                user.setAuditFlag(entity.isAuditFlag());
+                user.setBirthday(entity.getBirthday());
+                user.setCoverImagePath(entity.getCoverImagePath());
+                user.setHeadIcon(entity.getHeadIcon());
+                user.setDeleteFlag(entity.isDeleteFlag());
+                user.setEmail(entity.getEmail());
+                user.setEncryptedLoginStr(entity.getEncryptedLoginStr());
+                user.setGender(entity.getGender());
+                user.setMobileNo(entity.getMobileNo());
+                user.setQqno(entity.getQqno());
+                user.setQrcode(entity.getQrcode());
+                user.setQrcodePath(entity.getQrcodePath());
+                user.setRegisterDate(entity.getRegisterDate());
+                user.setRole(entity.getRole());
+                user.setSignature(entity.getSignature());
+                user.setSiteId(entity.getSiteId());
+                user.setSiteName(entity.getSitename());
+                user.setStatus(entity.getStatus());
+                user.setWeiboNo(entity.getWeiboNo());
+                user.setWeixinNo(entity.getWeixinNo());
+                user.setCommunityId(entity.getCommunityId());
+                user.setCommunityName(entity.getCommunityName());
+            }catch(Exception e){
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return user;
     }
@@ -78,7 +85,7 @@ public class UserEntityDataMapper {
      * @return {@link User} if valid {@link UserEntity} otherwise null.
      */
     public List<User> transform(Collection<UserEntity> userEntityCollection) {
-        List<User> userList = new ArrayList<>(20);
+        List<User> userList = new ArrayList<>();
         User user;
         for (UserEntity userEntity : userEntityCollection) {
             user = transform(userEntity);

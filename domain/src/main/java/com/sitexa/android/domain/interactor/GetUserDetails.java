@@ -30,11 +30,11 @@ import rx.Observable;
  */
 public class GetUserDetails extends UseCase {
 
-    private final long userId;
+    private final int userId;
     private final UserRepository userRepository;
 
     @Inject
-    public GetUserDetails(long userId, UserRepository userRepository,
+    public GetUserDetails(int userId, UserRepository userRepository,
                           ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
         super(threadExecutor, postExecutionThread);
         this.userId = userId;

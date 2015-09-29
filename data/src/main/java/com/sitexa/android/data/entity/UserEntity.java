@@ -23,10 +23,10 @@ import java.util.Date;
 /**
  * User Entity used in the data layer.
  */
-public class UserEntity implements BaseEntity{
+public class UserEntity {
 
     @SerializedName("userid")
-    private long userId;
+    private int userId;
 
     @SerializedName("username")
     private String username;
@@ -110,11 +110,11 @@ public class UserEntity implements BaseEntity{
         //empty
     }
 
-    public long getId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setId(long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

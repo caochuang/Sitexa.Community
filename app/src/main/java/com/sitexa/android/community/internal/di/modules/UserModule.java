@@ -34,12 +34,12 @@ import dagger.Provides;
 @Module
 public class UserModule {
 
-    private long userId = -1;
+    private int userId = -1;
 
     public UserModule() {
     }
 
-    public UserModule(long userId) {
+    public UserModule(int userId) {
         this.userId = userId;
     }
 

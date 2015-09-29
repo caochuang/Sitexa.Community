@@ -23,15 +23,10 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-
 /**
  * Created by xnpeng on 15-9-25.
  */
-public class OkHttpApi implements Callable<Observable<ApiResult>> {
+public class OkHttpApi implements Callable<String> {
 
     private static final String TAG = OkHttpApi.class.getSimpleName();
 
@@ -117,51 +112,37 @@ public class OkHttpApi implements Callable<Observable<ApiResult>> {
         return "";
     }
 
-    @NonNull
-    private Observable<ApiResult> doGet() {
-        final ApiResult result = new ApiResult();
+    private void doGet() {
         OkHttpClient okHttpClient = this.createClient();
         final Request request = new Request.Builder()
                 .url(this.url)
                 .addHeader(CONTENT_TYPE_LABEL, CONTENT_TYPE_VALUE_JSON)
                 .get()
                 .build();
-        return Observable.create(new Observable.OnSubscribe<ApiResult>() {
-            @Override
-            public void call(Subscriber<? super ApiResult> subscriber) {
-                if (isThereInternetConnection()) {
-                    try {
-                        String json = okHttpClient.newCall(request).execute().body().string();
-                        Map map = gson.fromJson(json, Map.class);
-                        String code = (String) map.get(CodeConstants.HttpCode.CODE);
-                        String value = (String) map.get(CodeConstants.HttpCode.VALUE);
+        if (isThereInternetConnection()) {
+            try {
+                String json = okHttpClient.newCall(request).execute().body().string();
 
-                        if (CodeConstants.HttpCode.SUCCESS_CODE.equals(code)) {
-                            result.setCode(CodeConstants.ApiCode.OK);
-                            result.setOriginalCode(String.valueOf(code));
-                            result.setValue(gson.toJson(value));
-                            subscriber.onNext(result);
-                            subscriber.onCompleted();
-                        } else {
-                            Log.d(TAG,CodeConstants.ApiCode.ERROR + ":" + String.valueOf(code) + ":" + value);
-                            subscriber.onError(new NetworkConnectionException(CodeConstants.ApiCode.ERROR + ":" + String.valueOf(code) + ":" + value));
-                        }
-                        Log.d(TAG, String.format("Request %s success. Result code: %s value: %s", url.toString(), CodeConstants.ApiCode.ERROR, value));
-                    } catch (Exception e) {
-                        subscriber.onError(new NetworkConnectionException(CodeConstants.ApiCode.SERVER_CONNECTION_ERROR + ":" + e.getMessage()));
-                        Log.d(TAG, String.format("Request %s failure. Result code: %s message: %s", url.toString(), CodeConstants.ApiCode.SERVER_CONNECTION_ERROR, e.getMessage()));
-                    }
+                //if (json != null) throw new RuntimeException(TAG + ":json=" + json);
+
+                Map map = gson.fromJson(json, Map.class);
+                String code = (String) map.get(CodeConstants.HttpCode.CODE);
+                Object value = map.get(CodeConstants.HttpCode.VALUE);
+
+                if (CodeConstants.HttpCode.SUCCESS_CODE.equals(code)) {
+                    this.response = gson.toJson(value);
                 } else {
-                    Log.d(TAG,"There is no internet connection");
-                    subscriber.onError(new NetworkConnectionException());
+                    throw new RuntimeException(new NetworkConnectionException(CodeConstants.ApiCode.ERROR + " : " + String.valueOf(code) + " : " + value.toString()));
                 }
+            } catch (Exception e) {
+                throw new RuntimeException(new NetworkConnectionException(CodeConstants.ApiCode.SERVER_CONNECTION_ERROR + " : " + e.getMessage()));
             }
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        } else {
+            throw new RuntimeException(new NetworkConnectionException());
+        }
     }
 
-    @NonNull
-    private Observable<ApiResult> doPost() {
-        final ApiResult result = new ApiResult();
+    private void doPost() {
         OkHttpClient okHttpClient = this.createClient();
         final Request request = new Request.Builder()
                 .url(this.url)
@@ -169,37 +150,27 @@ public class OkHttpApi implements Callable<Observable<ApiResult>> {
                 .post(requestBody)
                 .build();
 
-        return Observable.create(new Observable.OnSubscribe<ApiResult>() {
-            @Override
-            public void call(Subscriber<? super ApiResult> subscriber) {
-                if (isThereInternetConnection()) {
-                    try {
-                        String json = okHttpClient.newCall(request).execute().body().string();
-                        Map map = gson.fromJson(json, Map.class);
-                        String code = (String) map.get(CodeConstants.HttpCode.CODE);
-                        String value = (String) map.get(CodeConstants.HttpCode.VALUE);
+        if (isThereInternetConnection()) {
+            try {
+                String json = okHttpClient.newCall(request).execute().body().string();
+                //if (json != null) throw new RuntimeException(TAG + ":" + json);
+                Log.d(TAG,json);
+                Map map = gson.fromJson(json, Map.class);
+                String code = (String) map.get(CodeConstants.HttpCode.CODE);
+                Object value = map.get(CodeConstants.HttpCode.VALUE);
 
-                        if (CodeConstants.HttpCode.SUCCESS_CODE.equals(code)) {
-                            result.setCode(CodeConstants.ApiCode.OK);
-                            result.setOriginalCode(String.valueOf(code));
-                            result.setValue(gson.toJson(value));
-                            subscriber.onNext(result);
-                            subscriber.onCompleted();
-                        } else {
-                            Log.d(TAG,CodeConstants.ApiCode.ERROR + ":" + String.valueOf(code) + ":" + value);
-                            subscriber.onError(new NetworkConnectionException(CodeConstants.ApiCode.ERROR + ":" + String.valueOf(code) + ":" + value));
-                        }
-                        Log.d(TAG, String.format("Request %s success. Result code: %s value: %s", url.toString(), CodeConstants.ApiCode.ERROR, value));
-                    } catch (Exception e) {
-                        subscriber.onError(new NetworkConnectionException(CodeConstants.ApiCode.SERVER_CONNECTION_ERROR + ":" + e.getMessage()));
-                        Log.d(TAG, String.format("Request %s failure. Result code: %s message: %s", url.toString(), CodeConstants.ApiCode.SERVER_CONNECTION_ERROR, e.getMessage()));
-                    }
+                if (CodeConstants.HttpCode.SUCCESS_CODE.equals(code)) {
+                    this.response = gson.toJson(value);
                 } else {
-                    Log.d(TAG,"There is no internet connection");
-                    subscriber.onError(new NetworkConnectionException());
+                    throw new RuntimeException(new NetworkConnectionException(CodeConstants.ApiCode.ERROR + ":" + String.valueOf(code) + ":" + value.toString()));
                 }
+            } catch (Exception e) {
+                throw new RuntimeException(new NetworkConnectionException(CodeConstants.ApiCode.SERVER_CONNECTION_ERROR + ":" + e.getMessage()));
             }
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        } else {
+            throw new RuntimeException(new NetworkConnectionException());
+        }
+
     }
 
     private OkHttpClient createClient() {
@@ -217,11 +188,13 @@ public class OkHttpApi implements Callable<Observable<ApiResult>> {
      * @return A string response
      */
     @Override
-    public Observable<ApiResult> call() {
+    public String call() {
         if (this.requestBody != null)
-            return doPost();
+            doPost();
         else
-            return doGet();
+            doGet();
+
+        return this.response;
     }
 
     private boolean isThereInternetConnection() {

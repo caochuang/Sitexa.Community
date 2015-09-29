@@ -27,13 +27,12 @@ public class UserDetailsActivity extends BaseActivity implements HasComponent<Us
     private static final String INTENT_EXTRA_PARAM_USER_ID = "org.android.INTENT_PARAM_USER_ID";
     private static final String INSTANCE_STATE_PARAM_USER_ID = "org.android.STATE_PARAM_USER_ID";
 
-    private long userId;
+    private int userId;
     private UserComponent userComponent;
 
-    public static Intent getCallingIntent(Context context, long userId) {
+    public static Intent getCallingIntent(Context context, int userId) {
         Intent callingIntent = new Intent(context, UserDetailsActivity.class);
         callingIntent.putExtra(INTENT_EXTRA_PARAM_USER_ID, userId);
-
         return callingIntent;
     }
 
@@ -42,7 +41,6 @@ public class UserDetailsActivity extends BaseActivity implements HasComponent<Us
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_user_details);
-
         this.initializeActivity(savedInstanceState);
         this.initializeInjector();
     }
@@ -50,7 +48,7 @@ public class UserDetailsActivity extends BaseActivity implements HasComponent<Us
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         if (outState != null) {
-            outState.putLong(INSTANCE_STATE_PARAM_USER_ID, this.userId);
+            outState.putInt(INSTANCE_STATE_PARAM_USER_ID, this.userId);
         }
         super.onSaveInstanceState(outState);
     }
@@ -60,10 +58,10 @@ public class UserDetailsActivity extends BaseActivity implements HasComponent<Us
      */
     private void initializeActivity(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-            this.userId = getIntent().getLongExtra(INTENT_EXTRA_PARAM_USER_ID, -1);
+            this.userId = getIntent().getIntExtra(INTENT_EXTRA_PARAM_USER_ID, -1);
             addFragment(R.id.fl_fragment, UserDetailsFragment.newInstance(this.userId));
         } else {
-            this.userId = savedInstanceState.getLong(INSTANCE_STATE_PARAM_USER_ID);
+            this.userId = savedInstanceState.getInt(INSTANCE_STATE_PARAM_USER_ID);
         }
     }
 

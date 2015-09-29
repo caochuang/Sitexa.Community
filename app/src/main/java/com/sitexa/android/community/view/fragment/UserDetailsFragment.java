@@ -32,6 +32,8 @@ import butterknife.OnClick;
  */
 public class UserDetailsFragment extends BaseFragment implements UserDetailsView {
 
+    private final static String TAG = UserDetailsFragment.class.getSimpleName();
+
     private static final String ARGUMENT_KEY_USER_ID = "org.android.ARGUMENT_USER_ID";
 
     @Inject
@@ -54,17 +56,17 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
     @Bind(R.id.bt_retry)
     Button bt_retry;
 
-    private long userId;
+    private int userId;
 
     public UserDetailsFragment() {
         super();
     }
 
-    public static UserDetailsFragment newInstance(long userId) {
+    public static UserDetailsFragment newInstance(int userId) {
         UserDetailsFragment userDetailsFragment = new UserDetailsFragment();
 
         Bundle argumentsBundle = new Bundle();
-        argumentsBundle.putLong(ARGUMENT_KEY_USER_ID, userId);
+        argumentsBundle.putInt(ARGUMENT_KEY_USER_ID, userId);
         userDetailsFragment.setArguments(argumentsBundle);
 
         return userDetailsFragment;
@@ -113,19 +115,18 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
     private void initialize() {
         this.getComponent(UserComponent.class).inject(this);
         this.userDetailsPresenter.setView(this);
-        this.userId = getArguments().getLong(ARGUMENT_KEY_USER_ID);
+        this.userId = getArguments().getInt(ARGUMENT_KEY_USER_ID);
         this.userDetailsPresenter.initialize(this.userId);
-
     }
 
     @Override
     public void renderUser(UserModel user) {
         if (user != null) {
-            this.iv_cover.setImageUrl(user.getCoverImagePath());
+            this.iv_cover.setImageUrl(user.getHeadIcon());
             this.tv_fullname.setText(user.getUsername());
-            this.tv_email.setText(user.getEmail());
+            this.tv_email.setText(user.getMobileNo());
             this.tv_followers.setText(String.valueOf(user.getCommunityID()));
-            this.tv_description.setText(user.getSignature());
+            this.tv_description.setText(user.getCommunityName());
         }
     }
 

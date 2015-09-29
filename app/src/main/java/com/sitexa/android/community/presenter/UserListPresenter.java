@@ -15,13 +15,16 @@
  */
 package com.sitexa.android.community.presenter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.sitexa.android.community.exception.ErrorMessageFactory;
 import com.sitexa.android.community.internal.di.PerActivity;
 import com.sitexa.android.community.mapper.UserModelDataMapper;
 import com.sitexa.android.community.model.UserModel;
 import com.sitexa.android.community.view.UserListView;
+import com.sitexa.android.community.view.fragment.BaseFragment;
 import com.sitexa.android.domain.User;
 import com.sitexa.android.domain.exception.DefaultErrorBundle;
 import com.sitexa.android.domain.exception.ErrorBundle;
@@ -39,8 +42,9 @@ import javax.inject.Named;
  * layer.
  */
 @PerActivity
-public class UserListPresenter extends DefaultSubscriber<List<User>> implements Presenter {
+public class UserListPresenter implements Presenter {
 
+    private final static String TAG = UserListPresenter.class.getSimpleName();
     private final UseCase getUserListUseCase;
     private final UserModelDataMapper userModelDataMapper;
     private UserListView viewListView;
@@ -105,8 +109,8 @@ public class UserListPresenter extends DefaultSubscriber<List<User>> implements 
     }
 
     private void showErrorMessage(ErrorBundle errorBundle) {
-        String errorMessage = ErrorMessageFactory.create(this.viewListView.getContext(),
-                errorBundle.getException());
+        Context context = this.viewListView.getContext();
+        String errorMessage = ErrorMessageFactory.create(context, errorBundle.getException());
         this.viewListView.showError(errorMessage);
     }
 

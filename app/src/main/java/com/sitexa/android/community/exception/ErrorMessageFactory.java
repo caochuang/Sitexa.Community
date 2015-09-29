@@ -33,7 +33,7 @@ public class ErrorMessageFactory {
     /**
      * Creates a String representing an error message.
      *
-     * @param context Context needed to retrieve string resources.
+     * @param context   Context needed to retrieve string resources.
      * @param exception An exception used as a condition to retrieve the correct error message.
      * @return {@link String} an error message.
      */
@@ -44,6 +44,8 @@ public class ErrorMessageFactory {
             message = context.getString(R.string.exception_message_no_connection);
         } else if (exception instanceof UserNotFoundException) {
             message = context.getString(R.string.exception_message_user_not_found);
+        } else if (exception != null) {
+            message = exception.getMessage();
         }
 
         return message;

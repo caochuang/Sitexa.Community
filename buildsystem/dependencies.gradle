@@ -16,8 +16,8 @@ ext {
     butterKnifeVersion = '7.0.1'
     recyclerViewVersion = '21.0.3'
     rxJavaVersion = '1.0.14'
-    rxAndroidVersion = '0.25.0'
-    javaxAnnotationVersion = '10.0-b28'
+    rxAndroidVersion = '1.0.1'
+    javaxAnnotationVersion = '1.0'
     gsonVersion = '2.3'
     okHttpVersion = '2.5.0'
     androidAnnotationsVersion = '23.0.0' //"20.0.0"
@@ -40,7 +40,7 @@ ext {
             recyclerView   : "com.android.support:recyclerview-v7:${recyclerViewVersion}",
             rxJava         : "io.reactivex:rxjava:${rxJavaVersion}",
             rxAndroid      : "io.reactivex:rxandroid:${rxAndroidVersion}",
-            javaxAnnotation: "org.glassfish:javax.annotation:${javaxAnnotationVersion}",
+            javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
     ]
 
     presentationTestDependencies = [
@@ -54,7 +54,7 @@ ext {
     domainDependencies = [
             daggerCompiler : "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger         : "com.google.dagger:dagger:${daggerVersion}",
-            javaxAnnotation: "org.glassfish:javax.annotation:${javaxAnnotationVersion}",
+            javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             rxJava         : "io.reactivex:rxjava:${rxJavaVersion}",
     ]
 
@@ -70,7 +70,7 @@ ext {
             gson              : "com.google.code.gson:gson:${gsonVersion}",
             rxJava            : "io.reactivex:rxjava:${rxJavaVersion}",
             rxAndroid         : "io.reactivex:rxandroid:${rxAndroidVersion}",
-            javaxAnnotation   : "org.glassfish:javax.annotation:${javaxAnnotationVersion}",
+            javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}",
             retrofit          : "com.squareup.retrofit:retrofit:${retrofitVersion}"
     ]

@@ -37,6 +37,8 @@ import butterknife.OnClick;
  */
 public class UserListFragment extends BaseFragment implements UserListView {
 
+    private final static String TAG = UserListFragment.class.getSimpleName();
+
     @Inject
     UserListPresenter userListPresenter;
 
@@ -68,17 +70,23 @@ public class UserListFragment extends BaseFragment implements UserListView {
         super();
     }
 
+    /**
+     * Deprecated method in sdk23. must use sdk21 and target to sdk21.
+     * In sdk23,replaced with onAttach(Context context).
+     * How to get the hosted activity? Because getActivity() is valid after onActivityCreated().
+     *
+     * @param context Host activity
+     */
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        if (activity instanceof UserListListener) {
-            this.userListListener = (UserListListener) activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof UserListListener) {
+            this.userListListener = (UserListListener) context;
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View fragmentView = inflater.inflate(R.layout.fragment_user_list, container, true);
         ButterKnife.bind(this, fragmentView);
@@ -120,6 +128,9 @@ public class UserListFragment extends BaseFragment implements UserListView {
 
     private void initialize() {
         this.getComponent(UserComponent.class).inject(this);
+        //this.userListPresenter.setView(this);
+        //SDK 23,getActivity()
+        this.userListListener = (UserListListener) this.getActivity();
         this.userListPresenter.setView(this);
     }
 
@@ -163,7 +174,6 @@ public class UserListFragment extends BaseFragment implements UserListView {
 
     @Override
     public void viewUser(UserModel userModel) {
-        //todo....check this point,debug why userListListener = null
         if (this.userListListener != null) {
             this.userListListener.onUserClicked(userModel);
         }

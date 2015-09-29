@@ -22,7 +22,7 @@ import java.util.Date;
  */
 public class UserModel {
 
-    private final long userId;
+    private final int userId;
     private String Username;
     private String Password;
     private String CoverImagePath;
@@ -51,11 +51,11 @@ public class UserModel {
     private String Role;
 
 
-    public UserModel(long userId) {
+    public UserModel(int userId) {
         this.userId = userId;
     }
 
-    public long getUserId() {
+    public int getUserId() {
         return userId;
     }
 

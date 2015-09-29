@@ -15,6 +15,8 @@
  */
 package com.sitexa.android.data.repository;
 
+import android.util.Log;
+
 import com.sitexa.android.data.entity.mapper.UserEntityDataMapper;
 import com.sitexa.android.data.repository.datasource.UserDataStore;
 import com.sitexa.android.data.repository.datasource.UserDataStoreFactory;
@@ -34,6 +36,7 @@ import rx.Observable;
 @Singleton
 public class UserDataRepository implements UserRepository {
 
+    private final static String TAG = UserDataRepository.class.getSimpleName();
     private final UserDataStoreFactory userDataStoreFactory;
     private final UserEntityDataMapper userEntityDataMapper;
 
@@ -61,7 +64,7 @@ public class UserDataRepository implements UserRepository {
 
     @SuppressWarnings("Convert2MethodRef")
     @Override
-    public Observable<User> user(long userId) {
+    public Observable<User> user(int userId) {
         final UserDataStore userDataStore = this.userDataStoreFactory.create(userId);
         return userDataStore.userEntityDetails(userId)
                 .map(userEntity -> this.userEntityDataMapper.transform(userEntity));

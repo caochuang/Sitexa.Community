@@ -15,8 +15,10 @@
  */
 package com.sitexa.android.community.presenter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.sitexa.android.community.view.fragment.BaseFragment;
 import com.sitexa.android.domain.User;
 import com.sitexa.android.domain.exception.DefaultErrorBundle;
 import com.sitexa.android.domain.exception.ErrorBundle;
@@ -38,10 +40,13 @@ import javax.inject.Named;
 @PerActivity
 public class UserDetailsPresenter implements Presenter {
 
+    private final static String TAG = UserDetailsPresenter.class.getSimpleName();
     private final UseCase getUserDetailsUseCase;
     private final UserModelDataMapper userModelDataMapper;
-    /** id used to retrieve user details */
-    private long userId;
+    /**
+     * id used to retrieve user details
+     */
+    private int userId;
     private UserDetailsView viewDetailsView;
 
     @Inject
@@ -71,7 +76,7 @@ public class UserDetailsPresenter implements Presenter {
     /**
      * Initializes the presenter by start retrieving user details.
      */
-    public void initialize(long userId) {
+    public void initialize(int userId) {
         this.userId = userId;
         this.loadUserDetails();
     }
@@ -102,8 +107,8 @@ public class UserDetailsPresenter implements Presenter {
     }
 
     private void showErrorMessage(ErrorBundle errorBundle) {
-        String errorMessage = ErrorMessageFactory.create(this.viewDetailsView.getContext(),
-                errorBundle.getException());
+        Context context = this.viewDetailsView.getContext();
+        String errorMessage = ErrorMessageFactory.create(context, errorBundle.getException());
         this.viewDetailsView.showError(errorMessage);
     }
 

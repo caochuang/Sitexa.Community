@@ -1,4 +1,4 @@
-package com.sitexa.android.data.net;
+package com.sitexa.android.data.net.volley;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -19,6 +19,7 @@ import com.google.gson.GsonBuilder;
 import com.sitexa.android.data.constant.ApplicationConstants;
 import com.sitexa.android.data.constant.CodeConstants;
 import com.sitexa.android.data.exception.NetworkConnectionException;
+import com.sitexa.android.data.net.okhttp.ApiResult;
 import com.sitexa.android.data.utils.StringUtil;
 
 import java.io.UnsupportedEncodingException;

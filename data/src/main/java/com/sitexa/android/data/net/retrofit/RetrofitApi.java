@@ -1,4 +1,4 @@
-package com.sitexa.android.data.net;
+package com.sitexa.android.data.net.retrofit;
 
 import com.google.gson.reflect.TypeToken;
 import com.sitexa.android.data.constant.ApplicationConstants;

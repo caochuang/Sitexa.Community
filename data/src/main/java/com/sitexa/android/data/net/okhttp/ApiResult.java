@@ -1,4 +1,4 @@
-package com.sitexa.android.data.net;
+package com.sitexa.android.data.net.okhttp;
 
 import android.util.Log;
 

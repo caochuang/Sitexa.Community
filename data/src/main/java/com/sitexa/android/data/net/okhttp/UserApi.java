@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sitexa.android.data.net;
+package com.sitexa.android.data.net.okhttp;
 
 import com.sitexa.android.data.entity.UserEntity;
 
@@ -33,7 +33,7 @@ public interface UserApi {
 
     /** Api url for getting a user profile: Remember to concatenate id + 'json' */
     //static final String API_URL_GET_USER_DETAILS = API_BASE_URL + "user_";
-    String API_URL_GET_USER_DETAILS = "/user/findUserById?userId=";
+    String API_URL_GET_USER_DETAILS = "/user/findUserById";
 
     /**
      * Retrieves an {@link Observable} which will emit a List of {@link UserEntity}.

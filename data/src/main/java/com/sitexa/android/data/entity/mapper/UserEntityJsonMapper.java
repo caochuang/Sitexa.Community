@@ -62,13 +62,6 @@ public class UserEntityJsonMapper {
             } else {
                 throw new RuntimeException(new NetworkConnectionException(CodeConstants.ApiCode.ERROR + " : " + String.valueOf(code) + " : " + value.toString()));
             }
-
-/*
-            Type userEntityType = new TypeToken<UserEntity>() {
-            }.getType();
-            UserEntity userEntity = this.gson.fromJson(userJsonResponse, userEntityType);
-            return userEntity;
-*/
         } catch (Exception e) {
             throw new Exception(TAG + ":json mapping error " + e.getMessage());
         }
@@ -97,12 +90,6 @@ public class UserEntityJsonMapper {
             } else {
                 throw new RuntimeException(new NetworkConnectionException(CodeConstants.ApiCode.ERROR + " : " + String.valueOf(code) + " : " + value.toString()));
             }
-
-/*
-            Type listOfUserEntityType = new TypeToken<List<UserEntity>>() {
-            }.getType();
-            userEntityCollection = this.gson.fromJson(userListJsonResponse, listOfUserEntityType);
-*/
             return userEntityCollection;
         } catch (Exception e) {
             throw new Exception(TAG + ":json mapping error " + e.getMessage());

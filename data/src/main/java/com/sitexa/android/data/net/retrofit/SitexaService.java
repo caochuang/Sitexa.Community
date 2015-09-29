@@ -1,6 +1,7 @@
-package com.sitexa.android.data.net;
+package com.sitexa.android.data.net.retrofit;
 
 import com.sitexa.android.data.entity.UserEntity;
+import com.sitexa.android.data.net.okhttp.ApiResult;
 
 import java.util.Map;
 

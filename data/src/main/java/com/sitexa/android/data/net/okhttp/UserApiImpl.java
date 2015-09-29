@@ -1,14 +1,12 @@
-package com.sitexa.android.data.net;
+package com.sitexa.android.data.net.okhttp;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.sitexa.android.data.constant.ApplicationConstants;
 import com.sitexa.android.data.entity.UserEntity;
-import com.sitexa.android.data.exception.RepositoryErrorBundle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,8 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by xnpeng on 15-9-16.
@@ -43,7 +39,7 @@ public class UserApiImpl implements UserApi {
         return Observable.create(subscriber -> {
             try {
                 String result = OkHttpApi.newInstance(this.context)
-                        .getRequest(UserApi.API_URL_GET_USER_LIST, params)
+                        .getRequest(API_URL_GET_USER_LIST, params)
                         .call();
                 ApiResult apiResult = new ApiResult();
                 apiResult.setValue(result);
@@ -66,7 +62,7 @@ public class UserApiImpl implements UserApi {
         return Observable.create(subscriber -> {
             try {
                 String result = OkHttpApi.newInstance(this.context)
-                        .getRequest(UserApi.API_URL_GET_USER_DETAILS, params)
+                        .getRequest(API_URL_GET_USER_DETAILS, params)
                         .call();
                 ApiResult apiResult = new ApiResult();
                 apiResult.setValue(result);

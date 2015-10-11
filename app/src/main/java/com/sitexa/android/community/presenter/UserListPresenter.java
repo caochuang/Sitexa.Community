@@ -17,14 +17,12 @@ package com.sitexa.android.community.presenter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.sitexa.android.community.exception.ErrorMessageFactory;
 import com.sitexa.android.community.internal.di.PerActivity;
 import com.sitexa.android.community.mapper.UserModelDataMapper;
 import com.sitexa.android.community.model.UserModel;
 import com.sitexa.android.community.view.UserListView;
-import com.sitexa.android.community.view.fragment.BaseFragment;
 import com.sitexa.android.domain.User;
 import com.sitexa.android.domain.exception.DefaultErrorBundle;
 import com.sitexa.android.domain.exception.ErrorBundle;
@@ -60,10 +58,8 @@ public class UserListPresenter implements Presenter {
     }
 
     public void initialize() {
-        //this.loadUserList();
         this.hideViewRetry();
         this.showViewLoading();
-        //this.initialize();
         this.getUserListUseCase.execute(new UserListSubscriber());
     }
 
@@ -131,25 +127,4 @@ public class UserListPresenter implements Presenter {
             UserListPresenter.this.showUsersCollectionInView(users);
         }
     }
-
-/*
-    private void loadUserList() {
-        this.hideViewRetry();
-        this.showViewLoading();
-        this.initialize();
-    }
-*/
-
-/*
-    public void loadUser(UserModel userModel) {
-        this.viewListView.loadUser(userModel);
-    }
-*/
-
-/*
-     private void initialize() {
-         this.getUserListUseCase.execute(new UserListSubscriber());
-     }
-*/
-
 }

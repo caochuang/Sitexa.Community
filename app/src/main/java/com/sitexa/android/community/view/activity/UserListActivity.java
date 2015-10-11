@@ -48,7 +48,6 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_user_list);
 
-        //this.initializeInjector();
         this.userComponent = DaggerUserComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
@@ -66,14 +65,5 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
     public void loadUser(UserModel userModel) {
         this.navigator.navigateToUserDetails(this, userModel.getUserId());
     }
-
-/*
-    private void initializeInjector() {
-        this.userComponent = DaggerUserComponent.builder()
-                .applicationComponent(getApplicationComponent())
-                .activityModule(getActivityModule())
-                .build();
-    }
-*/
 
 }

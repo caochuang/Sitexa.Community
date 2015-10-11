@@ -72,9 +72,6 @@ public class UserListFragment extends BaseFragment implements UserListView {
                     if(userModel != null){
                         UserListFragment.this.loadUser(userModel);
                     }
-                    //if (UserListFragment.this.userListPresenter != null && userModel != null) {
-                    //    UserListFragment.this.userListPresenter.loadUser(userModel);
-                    //}
                 }
             };
 
@@ -93,9 +90,6 @@ public class UserListFragment extends BaseFragment implements UserListView {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        //if (context instanceof UserListListener) {
-        //    this.userListListener = (UserListListener) context;
-        //}
     }
 
     @Override
@@ -119,15 +113,12 @@ public class UserListFragment extends BaseFragment implements UserListView {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //this.initialize();
         this.getComponent(UserComponent.class).inject(this);
 
-        //this.userListPresenter.setView(this);
         //SDK 23,getActivity()
         this.userListListener = (UserListListener) this.getActivity();
-        this.userListPresenter.setView(this);
 
-        //this.loadUserList();
+        this.userListPresenter.setView(this);
         this.userListPresenter.initialize();
     }
 
@@ -213,32 +204,4 @@ public class UserListFragment extends BaseFragment implements UserListView {
     public interface UserListListener {
         void loadUser(final UserModel userModel);
     }
-
-/*
-    private void initialize() {
-        this.getComponent(UserComponent.class).inject(this);
-        //this.userListPresenter.setView(this);
-        //SDK 23,getActivity()
-        this.userListListener = (UserListListener) this.getActivity();
-        this.userListPresenter.setView(this);
-    }
-*/
-
-/*
-    private void setupUI() {
-        this.usersLayoutManager = new UsersLayoutManager(getActivity());
-        this.rv_users.setLayoutManager(usersLayoutManager);
-
-        this.usersAdapter = new UsersAdapter(getActivity(), new ArrayList<UserModel>());
-        this.usersAdapter.setOnItemClickListener(onItemClickListener);
-        this.rv_users.setAdapter(usersAdapter);
-    }
-*/
-
-/*
-    private void loadUserList() {
-        this.userListPresenter.initialize();
-    }
-*/
-
 }

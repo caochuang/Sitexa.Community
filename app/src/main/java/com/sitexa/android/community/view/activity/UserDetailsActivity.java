@@ -25,6 +25,7 @@ import com.sitexa.android.community.internal.di.HasComponent;
 import com.sitexa.android.community.internal.di.components.DaggerUserComponent;
 import com.sitexa.android.community.internal.di.components.UserComponent;
 import com.sitexa.android.community.internal.di.modules.UserModule;
+import com.sitexa.android.community.view.fragment.UserDetailsFragment;
 
 /**
  * Activity that shows details of a certain user.
@@ -54,6 +55,8 @@ public class UserDetailsActivity extends BaseActivity implements HasComponent<Us
 
         if (savedInstanceState == null) {
             this.userId = getIntent().getLongExtra(INTENT_EXTRA_PARAM_USER_ID, -1);
+            //Can use fragment tag in activity_user_details.xml,than comment out next line.
+            addFragment(R.id.fl_fragment, new UserDetailsFragment());
         } else {
             this.userId = savedInstanceState.getLong(INSTANCE_STATE_PARAM_USER_ID);
         }

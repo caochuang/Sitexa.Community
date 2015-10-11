@@ -25,7 +25,6 @@ import com.sitexa.android.community.internal.di.HasComponent;
 import com.sitexa.android.community.internal.di.components.DaggerUserComponent;
 import com.sitexa.android.community.internal.di.components.UserComponent;
 import com.sitexa.android.community.internal.di.modules.UserModule;
-import com.sitexa.android.community.view.fragment.UserDetailsFragment;
 
 /**
  * Activity that shows details of a certain user.
@@ -53,20 +52,16 @@ public class UserDetailsActivity extends BaseActivity implements HasComponent<Us
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_user_details);
 
-        //this.initializeActivity(savedInstanceState);
         if (savedInstanceState == null) {
             this.userId = getIntent().getLongExtra(INTENT_EXTRA_PARAM_USER_ID, -1);
-            //addFragment(R.id.fl_fragment, UserDetailsFragment.newInstance(this.userId));
-            //addFragment(R.id.fl_fragment, new UserDetailsFragment());
         } else {
             this.userId = savedInstanceState.getLong(INSTANCE_STATE_PARAM_USER_ID);
         }
 
-        //this.initializeInjector();
         this.userComponent = DaggerUserComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
-                .userModule(new UserModule(this.userId)) //传递userId给UserComponent以获取UserDetails
+                .userModule(new UserModule(this.userId))
                 .build();
 
     }
@@ -84,25 +79,4 @@ public class UserDetailsActivity extends BaseActivity implements HasComponent<Us
     public UserComponent getComponent() {
         return userComponent;
     }
-
-/*
-    private void initializeActivity(Bundle savedInstanceState) {
-        if (savedInstanceState == null) {
-            this.userId = getIntent().getLongExtra(INTENT_EXTRA_PARAM_USER_ID, -1);
-            //addFragment(R.id.fl_fragment, UserDetailsFragment.newInstance(this.userId));
-            addFragment(R.id.fl_fragment, new UserDetailsFragment());
-        } else {
-            this.userId = savedInstanceState.getInt(INSTANCE_STATE_PARAM_USER_ID);
-        }
-    }
-
-    private void initializeInjector() {
-        this.userComponent = DaggerUserComponent.builder()
-                .applicationComponent(getApplicationComponent())
-                .activityModule(getActivityModule())
-                .userModule(new UserModule(this.userId)) //传递userId给UserComponent以获取UserDetails
-                .build();
-    }
-*/
-
 }

@@ -18,17 +18,16 @@ package com.sitexa.android.community.presenter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.sitexa.android.community.view.fragment.BaseFragment;
-import com.sitexa.android.domain.User;
-import com.sitexa.android.domain.exception.DefaultErrorBundle;
-import com.sitexa.android.domain.exception.ErrorBundle;
-import com.sitexa.android.domain.interactor.DefaultSubscriber;
-import com.sitexa.android.domain.interactor.UseCase;
 import com.sitexa.android.community.exception.ErrorMessageFactory;
 import com.sitexa.android.community.internal.di.PerActivity;
 import com.sitexa.android.community.mapper.UserModelDataMapper;
 import com.sitexa.android.community.model.UserModel;
 import com.sitexa.android.community.view.UserDetailsView;
+import com.sitexa.android.domain.User;
+import com.sitexa.android.domain.exception.DefaultErrorBundle;
+import com.sitexa.android.domain.exception.ErrorBundle;
+import com.sitexa.android.domain.interactor.DefaultSubscriber;
+import com.sitexa.android.domain.interactor.UseCase;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -62,10 +61,8 @@ public class UserDetailsPresenter implements Presenter {
 
     public void initialize(long userId) {
         this.userId = userId;
-        //this.loadUserDetails();
         this.hideViewRetry();
         this.showViewLoading();
-        //this.getUserDetails();
         this.getUserDetailsUseCase.execute(new UserDetailsSubscriber());
     }
 
@@ -131,18 +128,5 @@ public class UserDetailsPresenter implements Presenter {
             UserDetailsPresenter.this.showUserDetailsInView(user);
         }
     }
-
-/*
-    private void loadUserDetails() {
-        this.hideViewRetry();
-        this.showViewLoading();
-        this.getUserDetails();
-    }
-
-    private void getUserDetails() {
-        this.getUserDetailsUseCase.execute(new UserDetailsSubscriber());
-    }
-
-*/
 
 }

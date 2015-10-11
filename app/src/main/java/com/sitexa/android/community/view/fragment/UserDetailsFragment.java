@@ -43,7 +43,6 @@ import butterknife.OnClick;
 public class UserDetailsFragment extends BaseFragment implements UserDetailsView {
 
     private final static String TAG = UserDetailsFragment.class.getSimpleName();
-    private static final String ARGUMENT_KEY_USER_ID = "org.android.ARGUMENT_USER_ID";
 
     @Inject
     UserDetailsPresenter userDetailsPresenter;
@@ -87,10 +86,8 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //this.initialize();
         this.getComponent(UserComponent.class).inject(this);
         this.userDetailsPresenter.setView(this);
-        //this.userId = getArguments().getLong(ARGUMENT_KEY_USER_ID);
         this.userDetailsPresenter.initialize(this.userId);
     }
 
@@ -171,31 +168,4 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
             this.userDetailsPresenter.initialize(this.userId);
         }
     }
-
-/*
-    public static UserDetailsFragment newInstance(long userId) {
-        UserDetailsFragment userDetailsFragment = new UserDetailsFragment();
-
-        Bundle argumentsBundle = new Bundle();
-        argumentsBundle.putLong(ARGUMENT_KEY_USER_ID, userId);
-        userDetailsFragment.setArguments(argumentsBundle);
-
-        return userDetailsFragment;
-    }
-*/
-
-/*    private void initialize() {
-        this.getComponent(UserComponent.class).inject(this);
-        this.userDetailsPresenter.setView(this);
-        //this.userId = getArguments().getLong(ARGUMENT_KEY_USER_ID);
-        this.userDetailsPresenter.initialize(this.userId);
-    }
-*/
-/*
-    private void loadUserDetails() {
-        if (this.userDetailsPresenter != null) {
-            this.userDetailsPresenter.initialize(this.userId);
-        }
-    }
-*/
 }

@@ -36,6 +36,7 @@ public class MainActivity extends BaseActivity {
     @Bind(R.id.btn_LoadData)
     Button btn_LoadData;
 
+    //////////Activity//////////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
+    //////////this//////////
     /**
      * Goes to the user list screen.
      */

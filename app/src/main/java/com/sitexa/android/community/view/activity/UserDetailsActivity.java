@@ -46,13 +46,29 @@ public class UserDetailsActivity extends BaseActivity implements HasComponent<Us
         return callingIntent;
     }
 
+    //////////Activity//////////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_user_details);
-        this.initializeActivity(savedInstanceState);
-        this.initializeInjector();
+
+        //this.initializeActivity(savedInstanceState);
+        if (savedInstanceState == null) {
+            this.userId = getIntent().getLongExtra(INTENT_EXTRA_PARAM_USER_ID, -1);
+            //addFragment(R.id.fl_fragment, UserDetailsFragment.newInstance(this.userId));
+            //addFragment(R.id.fl_fragment, new UserDetailsFragment());
+        } else {
+            this.userId = savedInstanceState.getLong(INSTANCE_STATE_PARAM_USER_ID);
+        }
+
+        //this.initializeInjector();
+        this.userComponent = DaggerUserComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
+                .userModule(new UserModule(this.userId)) //传递userId给UserComponent以获取UserDetails
+                .build();
+
     }
 
     @Override
@@ -63,13 +79,18 @@ public class UserDetailsActivity extends BaseActivity implements HasComponent<Us
         super.onSaveInstanceState(outState);
     }
 
-    /**
-     * Initializes this activity.
-     */
+    //////////HasComponent//////////
+    @Override
+    public UserComponent getComponent() {
+        return userComponent;
+    }
+
+/*
     private void initializeActivity(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             this.userId = getIntent().getLongExtra(INTENT_EXTRA_PARAM_USER_ID, -1);
-            addFragment(R.id.fl_fragment, UserDetailsFragment.newInstance(this.userId));
+            //addFragment(R.id.fl_fragment, UserDetailsFragment.newInstance(this.userId));
+            addFragment(R.id.fl_fragment, new UserDetailsFragment());
         } else {
             this.userId = savedInstanceState.getInt(INSTANCE_STATE_PARAM_USER_ID);
         }
@@ -82,9 +103,6 @@ public class UserDetailsActivity extends BaseActivity implements HasComponent<Us
                 .userModule(new UserModule(this.userId)) //传递userId给UserComponent以获取UserDetails
                 .build();
     }
+*/
 
-    @Override
-    public UserComponent getComponent() {
-        return userComponent;
-    }
 }

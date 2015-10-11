@@ -59,6 +59,16 @@ public class UserListPresenter implements Presenter {
         this.viewListView = view;
     }
 
+    public void initialize() {
+        //this.loadUserList();
+        this.hideViewRetry();
+        this.showViewLoading();
+        //this.initialize();
+        this.getUserListUseCase.execute(new UserListSubscriber());
+    }
+
+
+    //////////Presenter//////////
     @Override
     public void resume() {
     }
@@ -72,26 +82,7 @@ public class UserListPresenter implements Presenter {
         this.getUserListUseCase.unsubscribe();
     }
 
-    /**
-     * Initializes the presenter by start retrieving the user list.
-     */
-    public void initialize() {
-        this.loadUserList();
-    }
-
-    /**
-     * Loads all users.
-     */
-    private void loadUserList() {
-        this.hideViewRetry();
-        this.showViewLoading();
-        this.getUserList();
-    }
-
-    public void onUserClicked(UserModel userModel) {
-        this.viewListView.viewUser(userModel);
-    }
-
+    //////////for View//////////
     private void showViewLoading() {
         this.viewListView.showLoading();
     }
@@ -120,10 +111,7 @@ public class UserListPresenter implements Presenter {
         this.viewListView.renderUserList(userModelsCollection);
     }
 
-    private void getUserList() {
-        this.getUserListUseCase.execute(new UserListSubscriber());
-    }
-
+    //////////Subscriber//////////
     private final class UserListSubscriber extends DefaultSubscriber<List<User>> {
 
         @Override
@@ -143,4 +131,25 @@ public class UserListPresenter implements Presenter {
             UserListPresenter.this.showUsersCollectionInView(users);
         }
     }
+
+/*
+    private void loadUserList() {
+        this.hideViewRetry();
+        this.showViewLoading();
+        this.initialize();
+    }
+*/
+
+/*
+    public void loadUser(UserModel userModel) {
+        this.viewListView.loadUser(userModel);
+    }
+*/
+
+/*
+     private void initialize() {
+         this.getUserListUseCase.execute(new UserListSubscriber());
+     }
+*/
+
 }

@@ -32,9 +32,9 @@ public interface UserListView extends LoadDataView {
     void renderUserList(Collection<UserModel> userModelCollection);
 
     /**
-     * View a {@link UserModel} profile/details.
+     * Load a {@link UserModel} profile/details.
      *
-     * @param userModel The user that will be shown.
+     * @param userModel The user that will be load.
      */
-    void viewUser(UserModel userModel);
+    void loadUser(UserModel userModel);
 }

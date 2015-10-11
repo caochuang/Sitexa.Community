@@ -33,7 +33,7 @@ import com.sitexa.android.community.view.fragment.UserListFragment;
 public class UserListActivity extends BaseActivity implements HasComponent<UserComponent>,
         UserListFragment.UserListListener {
 
-    static final String TAG = "[UserListActivity]";
+    static final String TAG = UserListActivity.class.getCanonicalName();
 
     private UserComponent userComponent;
 
@@ -41,29 +41,39 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
         return new Intent(context, UserListActivity.class);
     }
 
+    //////////Activity//////////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_user_list);
 
-        this.initializeInjector();
-    }
-
-    private void initializeInjector() {
+        //this.initializeInjector();
         this.userComponent = DaggerUserComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
                 .build();
     }
 
+    //////////HasComponent//////////
     @Override
     public UserComponent getComponent() {
         return userComponent;
     }
 
+    //////////this//////////
     @Override
-    public void onUserClicked(UserModel userModel) {
+    public void loadUser(UserModel userModel) {
         this.navigator.navigateToUserDetails(this, userModel.getUserId());
     }
+
+/*
+    private void initializeInjector() {
+        this.userComponent = DaggerUserComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
+                .build();
+    }
+*/
+
 }

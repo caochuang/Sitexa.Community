@@ -60,6 +60,16 @@ public class UserDetailsPresenter implements Presenter {
         this.viewDetailsView = view;
     }
 
+    public void initialize(long userId) {
+        this.userId = userId;
+        //this.loadUserDetails();
+        this.hideViewRetry();
+        this.showViewLoading();
+        //this.getUserDetails();
+        this.getUserDetailsUseCase.execute(new UserDetailsSubscriber());
+    }
+
+    //////////Presenter//////////
     @Override
     public void resume() {
     }
@@ -73,23 +83,7 @@ public class UserDetailsPresenter implements Presenter {
         this.getUserDetailsUseCase.unsubscribe();
     }
 
-    /**
-     * Initializes the presenter by start retrieving user details.
-     */
-    public void initialize(long userId) {
-        this.userId = userId;
-        this.loadUserDetails();
-    }
-
-    /**
-     * Loads user details.
-     */
-    private void loadUserDetails() {
-        this.hideViewRetry();
-        this.showViewLoading();
-        this.getUserDetails();
-    }
-
+    //////////for View//////////
     private void showViewLoading() {
         this.viewDetailsView.showLoading();
     }
@@ -117,10 +111,7 @@ public class UserDetailsPresenter implements Presenter {
         this.viewDetailsView.renderUser(userModel);
     }
 
-    private void getUserDetails() {
-        this.getUserDetailsUseCase.execute(new UserDetailsSubscriber());
-    }
-
+    //////////Subscriber//////////
     private final class UserDetailsSubscriber extends DefaultSubscriber<User> {
 
         @Override
@@ -140,4 +131,18 @@ public class UserDetailsPresenter implements Presenter {
             UserDetailsPresenter.this.showUserDetailsInView(user);
         }
     }
+
+/*
+    private void loadUserDetails() {
+        this.hideViewRetry();
+        this.showViewLoading();
+        this.getUserDetails();
+    }
+
+    private void getUserDetails() {
+        this.getUserDetailsUseCase.execute(new UserDetailsSubscriber());
+    }
+
+*/
+
 }

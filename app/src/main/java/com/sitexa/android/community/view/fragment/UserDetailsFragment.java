@@ -43,7 +43,6 @@ import butterknife.OnClick;
 public class UserDetailsFragment extends BaseFragment implements UserDetailsView {
 
     private final static String TAG = UserDetailsFragment.class.getSimpleName();
-
     private static final String ARGUMENT_KEY_USER_ID = "org.android.ARGUMENT_USER_ID";
 
     @Inject
@@ -66,22 +65,14 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
     @Bind(R.id.bt_retry)
     Button bt_retry;
 
-    private long userId;
+    @Inject
+    long userId;
 
     public UserDetailsFragment() {
         super();
     }
 
-    public static UserDetailsFragment newInstance(long userId) {
-        UserDetailsFragment userDetailsFragment = new UserDetailsFragment();
-
-        Bundle argumentsBundle = new Bundle();
-        argumentsBundle.putLong(ARGUMENT_KEY_USER_ID, userId);
-        userDetailsFragment.setArguments(argumentsBundle);
-
-        return userDetailsFragment;
-    }
-
+    //////////Fragment//////////
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -95,7 +86,12 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.initialize();
+
+        //this.initialize();
+        this.getComponent(UserComponent.class).inject(this);
+        this.userDetailsPresenter.setView(this);
+        //this.userId = getArguments().getLong(ARGUMENT_KEY_USER_ID);
+        this.userDetailsPresenter.initialize(this.userId);
     }
 
     @Override
@@ -122,24 +118,7 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
         this.userDetailsPresenter.destroy();
     }
 
-    private void initialize() {
-        this.getComponent(UserComponent.class).inject(this);
-        this.userDetailsPresenter.setView(this);
-        this.userId = getArguments().getLong(ARGUMENT_KEY_USER_ID);
-        this.userDetailsPresenter.initialize(this.userId);
-    }
-
-    @Override
-    public void renderUser(UserModel user) {
-        if (user != null) {
-            this.iv_cover.setImageUrl(user.getHeadIcon());
-            this.tv_fullname.setText(user.getUsername());
-            this.tv_email.setText(user.getMobileNo());
-            this.tv_followers.setText(String.valueOf(user.getCommunityID()));
-            this.tv_description.setText(user.getCommunityName());
-        }
-    }
-
+    //////////LoadDataView//////////
     @Override
     public void showLoading() {
         this.rl_progress.setVisibility(View.VISIBLE);
@@ -172,17 +151,51 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
         return getActivity().getApplicationContext();
     }
 
-    /**
-     * Loads all users.
-     */
-    private void loadUserDetails() {
+    //////////UserDetailsView//////////
+    @Override
+    public void renderUser(UserModel user) {
+        if (user != null) {
+            this.iv_cover.setImageUrl(user.getHeadIcon());
+            this.tv_fullname.setText(user.getUsername());
+            this.tv_email.setText(user.getMobileNo());
+            this.tv_followers.setText(String.valueOf(user.getCommunityID()));
+            this.tv_description.setText(user.getCommunityName());
+        }
+    }
+
+    /////////this///////////
+    @OnClick(R.id.bt_retry)
+    void onButtonRetryClick() {
+        //this.loadUserDetails();
         if (this.userDetailsPresenter != null) {
             this.userDetailsPresenter.initialize(this.userId);
         }
     }
 
-    @OnClick(R.id.bt_retry)
-    void onButtonRetryClick() {
-        UserDetailsFragment.this.loadUserDetails();
+/*
+    public static UserDetailsFragment newInstance(long userId) {
+        UserDetailsFragment userDetailsFragment = new UserDetailsFragment();
+
+        Bundle argumentsBundle = new Bundle();
+        argumentsBundle.putLong(ARGUMENT_KEY_USER_ID, userId);
+        userDetailsFragment.setArguments(argumentsBundle);
+
+        return userDetailsFragment;
     }
+*/
+
+/*    private void initialize() {
+        this.getComponent(UserComponent.class).inject(this);
+        this.userDetailsPresenter.setView(this);
+        //this.userId = getArguments().getLong(ARGUMENT_KEY_USER_ID);
+        this.userDetailsPresenter.initialize(this.userId);
+    }
+*/
+/*
+    private void loadUserDetails() {
+        if (this.userDetailsPresenter != null) {
+            this.userDetailsPresenter.initialize(this.userId);
+        }
+    }
+*/
 }

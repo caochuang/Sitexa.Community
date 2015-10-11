@@ -18,6 +18,7 @@ package com.sitexa.android.data.net.okhttp;
 import com.sitexa.android.data.entity.UserEntity;
 
 import java.util.List;
+import java.util.Map;
 
 import rx.Observable;
 
@@ -25,11 +26,17 @@ import rx.Observable;
  * RestApi for retrieving data from the network.
  */
 public interface UserApi {
-    /** Api url for getting all users */
+    /**
+     * Api url for getting all users
+     */
     String API_URL_GET_USER_LIST = "/user/getUserList";
 
-    /** Api url for getting a user profile */
+    /**
+     * Api url for getting a user profile
+     */
     String API_URL_GET_USER_DETAILS = "/user/findUserById";
+
+    String API_URL_USER_LOGIN = "/authority/doLogin";
 
     /**
      * Retrieves an {@link Observable} which will emit a List of {@link UserEntity}.
@@ -42,4 +49,6 @@ public interface UserApi {
      * @param userId The user id used to get user data.
      */
     Observable<UserEntity> userEntityById(final long userId);
+
+    Observable<UserEntity> userLogin(final Map<String, String> fields);
 }

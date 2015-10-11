@@ -17,9 +17,10 @@ package com.sitexa.android.community.internal.di.modules;
 
 import com.sitexa.android.domain.executor.PostExecutionThread;
 import com.sitexa.android.domain.executor.ThreadExecutor;
-import com.sitexa.android.domain.interactor.GetUserDetails;
-import com.sitexa.android.domain.interactor.GetUserList;
+import com.sitexa.android.domain.interactor.user.GetUserDetails;
+import com.sitexa.android.domain.interactor.user.GetUserList;
 import com.sitexa.android.domain.interactor.UseCase;
+import com.sitexa.android.domain.interactor.user.UserLoginCase;
 import com.sitexa.android.domain.repository.UserRepository;
 import com.sitexa.android.community.internal.di.PerActivity;
 
@@ -45,10 +46,36 @@ public class UserModule {
 
     @Provides
     @PerActivity
+    long provideUserId() {
+        return userId;
+    }
+
+    /**
+     * 因为GetUserList不需要客户提供参数，Dagger可以自动生成构造函数所需的参数GetUserList，
+     * 故可以直接返回该对象。但GetUserDetails需要传入客户参数userId,所以需要完整传入构造函数所需的参数。
+     * 问题：如果要进行翻页查询，需要传入页码和每页记录数，是否需要一个新的构造函数？
+     * 如：UserModule(int pageNo,int pageSize)?
+     *
+     * @param getUserList UseCase instance
+     * @return UseCase
+     */
+    @Provides
+    @PerActivity
     @Named("userList")
     UseCase provideGetUserListUseCase(GetUserList getUserList) {
         return getUserList;
     }
+
+/*
+    @Provides
+    @PerActivity
+    @Named("userList")
+    UseCase provideGetUserListUseCase(UserRepository userRepository,
+                                      ThreadExecutor threadExecutor,
+                                      PostExecutionThread postExecutionThread) {
+        return new GetUserList(userRepository,threadExecutor,postExecutionThread);
+    }
+*/
 
     @Provides
     @PerActivity
@@ -57,5 +84,14 @@ public class UserModule {
                                          ThreadExecutor threadExecutor,
                                          PostExecutionThread postExecutionThread) {
         return new GetUserDetails(userId, userRepository, threadExecutor, postExecutionThread);
+    }
+
+    @Provides
+    @PerActivity
+    @Named("userLogin")
+    UseCase provideUserLoginUseCase(UserRepository userRepository,
+                                    ThreadExecutor threadExecutor,
+                                    PostExecutionThread postExecutionThread){
+        return new UserLoginCase(userRepository,threadExecutor,postExecutionThread);
     }
 }

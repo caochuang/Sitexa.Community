@@ -17,6 +17,7 @@
 package com.sitexa.android.data.entity.mapper;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
@@ -35,26 +36,21 @@ public class EntityJsonMapper {
 
     @Inject
     public EntityJsonMapper() {
-        this.gson = new Gson();
+        this.gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
     }
 
-    public <T> T transformEntity(String jsonResponse) {
+    public <T> T transformEntity(String jsonResponse, Class<?> aClass) {
         try {
-            Type entityType = new TypeToken<T>() {
-            }.getType();
-            T entity = this.gson.fromJson(jsonResponse, entityType);
-            return entity;
+            Object entity = this.gson.fromJson(jsonResponse, aClass);
+            return (T) entity;
         } catch (JsonSyntaxException jsonException) {
             throw jsonException;
         }
     }
 
-    public <T> List<T> transformEntityCollection(String listJsonResponse) throws JsonSyntaxException {
-
+    public <T> List<T> transformEntityCollection(String listJsonResponse, Type listOfEntityType) {
         List<T> entityCollection;
         try {
-            Type listOfEntityType = new TypeToken<List<T>>() {
-            }.getType();
             entityCollection = this.gson.fromJson(listJsonResponse, listOfEntityType);
             return entityCollection;
         } catch (JsonSyntaxException jsonException) {

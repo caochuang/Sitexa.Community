@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--***********************通用颜色***************************************-->
+    <!--半透明-->
+    <color name="translucent">#b0000000</color>
+    <!--全透明-->
+    <color name="transparent">#00000000</color>
+    <!--黑色-->
+    <color name="black">#000</color>
+    <!--白色-->
+    <color name="white">#ffffffff</color>
+    <!--淡白色-->
+    <color name="white_pressed">#f0f0f0</color>
+    <!--蓝色-->
+    <color name="blue">#ff0f81d9</color>
+
+
+    <!--**********************系统组件颜色*****************************************-->
+    <!--正常状态下的actionbar颜色-->
+    <color name="sys_action_bar_normal_bg">#4AB46B</color>
+    <color name="sys_theme_color_normal">#4AB46B</color>
+    <color name="sys_theme_color_pressed">#3b8852</color>
+
+    <!--***********自定义material dialog使用到的颜色代码*********************************-->
+    <color name="dialog_card_background">#ffffff</color>
+    <color name="dialog_card_shadow">#10000000</color>
+    <color name="dialog_lite_blue">#ff359ff2</color>
+    <color name="dialog_window_background">#00000000</color>
+
+
+    <!---*********************通用组件颜色*************************************-->
+    <!--一组蓝色按钮的颜色-->
+    <color name="btn_primary">#ff428bca</color>
+    <color name="btn_primary_disabled">#a5428bca</color>
+    <color name="btn_primary_disabled_edge">#a5357ebd</color>
+    <color name="btn_primary_edge">#ff357ebd</color>
+    <color name="btn_primary_pressed">#ff3276b1</color>
+    <color name="btn_primary_pressed_edge">#ff285e8e</color>
+
+    <!--一组淡灰色效果的按钮颜色-->
+    <color name="btn_grayish">#dfdfdf</color>
+    <color name="btn_grayish_pressed">#bfbfbf</color>
+
+
+    <!--***********************特殊位置颜色****************************************-->
+    <!--下载进度条的百分比颜色-->
+    <color name="progress_bar_downloading">#4AB46B</color>
+
+    <!--业务颜色代码-->
+    <!--广场用户名称颜色代码-->
+    <color name="square_username_color">#436179</color>
+    <color name="message_input_layout_color">#dfdfdf</color>
+    <color name="square_man_color">#388ecb</color>
+    <color name="square_woman_color">#eb6a6a</color>
+</resources>

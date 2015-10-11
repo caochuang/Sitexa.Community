@@ -25,12 +25,12 @@ import javax.inject.Singleton;
  * Class user as Serializer/Deserializer for user entities.
  */
 @Singleton
-public class JsonSerializer {
+public class UserJsonSerializer {
 
     private final Gson gson = new Gson();
 
     @Inject
-    public JsonSerializer() {
+    public UserJsonSerializer() {
     }
 
     /**

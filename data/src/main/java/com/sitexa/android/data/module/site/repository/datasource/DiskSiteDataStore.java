@@ -14,20 +14,25 @@
  *   limitations under the License.
  */
 
-package com.sitexa.android.data.entity.mapper;
+package com.sitexa.android.data.module.site.repository.datasource;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import com.sitexa.android.data.module.site.entity.SiteEntity;
+
+import java.util.List;
+
+import rx.Observable;
 
 /**
- * Created by xnpeng on 15-9-6.
- * 写一个通用类型转换器，可能吗？
+ * Created by xnpeng on 15-10-8.
  */
-@Singleton
-public class EntityDataMapper {
-
-    @Inject
-    public EntityDataMapper() {
+public class DiskSiteDataStore implements SiteDataStore {
+    @Override
+    public Observable<List<SiteEntity>> siteEntityList() {
+        return null;
     }
 
+    @Override
+    public Observable<SiteEntity> siteEntityDetails(String siteId) {
+        return null;
+    }
 }

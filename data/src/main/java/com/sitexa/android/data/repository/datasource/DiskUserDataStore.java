@@ -15,10 +15,13 @@
  */
 package com.sitexa.android.data.repository.datasource;
 
+import android.support.annotation.NonNull;
+
 import com.sitexa.android.data.cache.UserCache;
 import com.sitexa.android.data.entity.UserEntity;
 
 import java.util.List;
+import java.util.Map;
 
 import rx.Observable;
 
@@ -27,25 +30,30 @@ import rx.Observable;
  */
 public class DiskUserDataStore implements UserDataStore {
 
-  private final UserCache userCache;
+    private final UserCache userCache;
 
-  /**
-   * Construct a {@link UserDataStore} based file system data store.
-   *
-   * @param userCache A {@link UserCache} to cache data retrieved from the api.
-   */
-  public DiskUserDataStore(UserCache userCache) {
-    this.userCache = userCache;
-  }
+    /**
+     * Construct a {@link UserDataStore} based file system data store.
+     *
+     * @param userCache A {@link UserCache} to cache data retrieved from the api.
+     */
+    public DiskUserDataStore(UserCache userCache) {
+        this.userCache = userCache;
+    }
 
-  @Override
-  public Observable<List<UserEntity>> userEntityList() {
-    //TODO: implement simple cache for storing/retrieving collections of users.
-    throw new UnsupportedOperationException("Operation is not available!!!");
-  }
+    @Override
+    public Observable<List<UserEntity>> userEntityList() {
+        //TODO: implement simple cache for storing/retrieving collections of users.
+        throw new UnsupportedOperationException("Operation is not available!!!");
+    }
 
-  @Override
-  public Observable<UserEntity> userEntityDetails(final long userId) {
-     return this.userCache.get(userId);
-  }
+    @Override
+    public Observable<UserEntity> userEntityDetails(final long userId) {
+        return this.userCache.get(userId);
+    }
+
+    @Override
+    public Observable<UserEntity> userLogin(@NonNull Map<String, String> fields) {
+        throw new UnsupportedOperationException("Operation is not available!!!");
+    }
 }

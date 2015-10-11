@@ -18,6 +18,7 @@ package com.sitexa.android.domain.repository;
 import com.sitexa.android.domain.User;
 
 import java.util.List;
+import java.util.Map;
 
 import rx.Observable;
 
@@ -36,4 +37,6 @@ public interface UserRepository {
      * @param userId The user id used to retrieve user data.
      */
     Observable<User> user(final long userId);
+
+    Observable<User> userLogin(final Map<String, String> fields);
 }

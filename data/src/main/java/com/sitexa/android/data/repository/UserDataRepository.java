@@ -24,6 +24,7 @@ import com.sitexa.android.domain.User;
 import com.sitexa.android.domain.repository.UserRepository;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -68,5 +69,13 @@ public class UserDataRepository implements UserRepository {
         final UserDataStore userDataStore = this.userDataStoreFactory.create(userId);
         return userDataStore.userEntityDetails(userId)
                 .map(userEntity -> this.userEntityDataMapper.transform(userEntity));
+    }
+
+    @SuppressWarnings("Convert2MethodRef")
+    @Override
+    public Observable<User> userLogin(Map<String, String> fields) {
+        final UserDataStore userDataStore = this.userDataStoreFactory.createCloudDataStore();
+        return userDataStore.userLogin(fields)
+                .map(entity -> this.userEntityDataMapper.transform(entity));
     }
 }

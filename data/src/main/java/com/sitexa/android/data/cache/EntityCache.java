@@ -23,11 +23,11 @@ import rx.Observable;
  */
 public interface EntityCache {
 
-    <T> Observable<T> get(final long id);
+    <T> Observable<T> get(final String id, Class<?> aClass);
 
-    <T> void put(T entity);
+    <T> void put(final String id, T entity);
 
-    boolean isCached(final long id);
+    boolean isCached(final String id);
 
     boolean isExpired();
 

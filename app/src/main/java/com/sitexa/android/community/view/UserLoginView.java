@@ -14,12 +14,16 @@
  *   limitations under the License.
  */
 
-package com.sitexa.android.data.entity;
+package com.sitexa.android.community.view;
+
+import com.sitexa.android.community.model.UserModel;
 
 /**
- * Created by xnpeng on 15-9-6.
+ * Created by xnpeng on 15-10-9.
  */
-public interface BaseEntity {
-    public long getId();
-    public void setId(long id);
+public interface UserLoginView extends LoadDataView {
+
+    void doLogin(String username,String password);
+
+    void renderLoginSuccess(UserModel userModel);
 }

@@ -62,7 +62,7 @@ public class UserDataStoreFactory {
      * Create {@link UserDataStore} to retrieve data from the Cloud.
      */
     public UserDataStore createCloudDataStore() {
-        UserEntityJsonMapper userEntityJsonMapper = new UserEntityJsonMapper();
+        //UserEntityJsonMapper userEntityJsonMapper = new UserEntityJsonMapper();
         //UserRestApi userRestApi = new UserRestApiImpl(this.context, userEntityJsonMapper);
         UserApi userApi = new UserApiImpl(this.context);
 

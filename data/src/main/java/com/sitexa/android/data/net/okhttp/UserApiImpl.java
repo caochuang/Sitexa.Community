@@ -92,6 +92,25 @@ public class UserApiImpl implements UserApi {
         });
     }
 
+    @Override
+    public Observable<UserEntity> userLogin(Map<String, String> fields) {
+        return Observable.create(subscriber -> {
+            try{
+                String result = OkHttpApi.newInstance(this.context)
+                        .getRequest(API_URL_USER_LOGIN,fields)
+                        .call();
+                ApiResult apiResult = new ApiResult();
+                apiResult.setValue(result);
+                UserEntity entity = apiResult.getDomain(UserEntity.class);
+                entity = reformImageUrl(entity);
+                subscriber.onNext(entity);
+                subscriber.onCompleted();
+            }catch (Exception e){
+                subscriber.onError(e);
+            }
+        });
+    }
+
     private UserEntity reformImageUrl(UserEntity userEntity) {
         String imgUrl = userEntity.getCoverImagePath();
         if (imgUrl != null && !"".equals(imgUrl))

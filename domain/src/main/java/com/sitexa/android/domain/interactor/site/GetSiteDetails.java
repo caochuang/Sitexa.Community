@@ -14,33 +14,33 @@
  *   limitations under the License.
  */
 
-package com.sitexa.android.domain.interactor;
+package com.sitexa.android.domain.interactor.site;
 
 import com.sitexa.android.domain.executor.PostExecutionThread;
 import com.sitexa.android.domain.executor.ThreadExecutor;
-import com.sitexa.android.domain.repository.SpaceRepository;
-
-import javax.inject.Inject;
+import com.sitexa.android.domain.interactor.UseCase;
+import com.sitexa.android.domain.repository.SiteRepository;
 
 import rx.Observable;
 
 /**
- * Created by xnpeng on 15-9-5.
+ * Created by xnpeng on 15-9-30.
  */
-public class GetSpaceList extends UseCase {
+public class GetSiteDetails extends UseCase {
 
-    private final SpaceRepository spaceRepository;
+    private final String siteId;
+    private final SiteRepository siteRepository;
 
-    @Inject
-    public GetSpaceList(SpaceRepository spaceRepository,
-                        ThreadExecutor threadExecutor,
-                        PostExecutionThread postExecutionThread) {
+    public GetSiteDetails(String siteId, SiteRepository siteRepository,
+                          ThreadExecutor threadExecutor,
+                          PostExecutionThread postExecutionThread) {
         super(threadExecutor, postExecutionThread);
-        this.spaceRepository = spaceRepository;
+        this.siteRepository = siteRepository;
+        this.siteId = siteId;
     }
 
     @Override
-    protected Observable buildUseCaseObservable() {
-        return this.spaceRepository.spaces();
+    protected Observable buildUseCaseObservable(Object... param) {
+        return this.siteRepository.site(this.siteId);
     }
 }

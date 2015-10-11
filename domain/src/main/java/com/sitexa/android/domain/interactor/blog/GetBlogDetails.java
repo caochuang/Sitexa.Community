@@ -13,34 +13,37 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.sitexa.android.domain.interactor;
+
+package com.sitexa.android.domain.interactor.blog;
 
 import com.sitexa.android.domain.executor.PostExecutionThread;
 import com.sitexa.android.domain.executor.ThreadExecutor;
-import com.sitexa.android.domain.repository.UserRepository;
+import com.sitexa.android.domain.interactor.UseCase;
+import com.sitexa.android.domain.repository.BlogRepository;
 
 import javax.inject.Inject;
 
 import rx.Observable;
 
 /**
- * This class is an implementation of {@link UseCase} that represents a use case for
- * retrieving a collection of all {@link com.sitexa.android.domain.User}.
+ * Created by xnpeng on 15-9-5.
  */
-public class GetUserList extends UseCase {
+public class GetBlogDetails extends UseCase {
 
-    private final UserRepository userRepository;
+    private final long blogId;
+    private final BlogRepository blogRepository;
 
     @Inject
-    public GetUserList(UserRepository userRepository,
-                       ThreadExecutor threadExecutor,
-                       PostExecutionThread postExecutionThread) {
+    public GetBlogDetails(long blogId, BlogRepository blogRepository,
+                          ThreadExecutor threadExecutor,
+                          PostExecutionThread postExecutionThread) {
         super(threadExecutor, postExecutionThread);
-        this.userRepository = userRepository;
+        this.blogId = blogId;
+        this.blogRepository = blogRepository;
     }
 
     @Override
-    public Observable buildUseCaseObservable() {
-        return this.userRepository.users();
+    protected Observable buildUseCaseObservable(Object... param) {
+        return this.blogRepository.blog(this.blogId);
     }
 }

@@ -17,7 +17,7 @@ package com.sitexa.android.data.cache;
 
 import android.content.Context;
 
-import com.sitexa.android.data.cache.serializer.JsonSerializer;
+import com.sitexa.android.data.cache.serializer.UserJsonSerializer;
 import com.sitexa.android.data.entity.UserEntity;
 import com.sitexa.android.data.exception.UserNotFoundException;
 import com.sitexa.android.domain.executor.ThreadExecutor;
@@ -36,7 +36,7 @@ import rx.Subscriber;
 @Singleton
 public class UserCacheImpl implements UserCache {
 
-    private static final String SETTINGS_FILE_NAME = "com.fernandocejas.android.SETTINGS";
+    private static final String SETTINGS_FILE_NAME = "com.sitexa.android.SETTINGS";
     private static final String SETTINGS_KEY_LAST_CACHE_UPDATE = "last_cache_update";
 
     private static final String DEFAULT_FILE_NAME = "user_";
@@ -44,7 +44,7 @@ public class UserCacheImpl implements UserCache {
 
     private final Context context;
     private final File cacheDir;
-    private final JsonSerializer serializer;
+    private final UserJsonSerializer serializer;
     private final FileManager fileManager;
     private final ThreadExecutor threadExecutor;
 
@@ -52,11 +52,11 @@ public class UserCacheImpl implements UserCache {
      * Constructor of the class {@link UserCacheImpl}.
      *
      * @param context A
-     * @param userCacheSerializer {@link JsonSerializer} for object serialization.
+     * @param userCacheSerializer {@link UserJsonSerializer} for object serialization.
      * @param fileManager {@link FileManager} for saving serialized objects to the file system.
      */
     @Inject
-    public UserCacheImpl(Context context, JsonSerializer userCacheSerializer,
+    public UserCacheImpl(Context context, UserJsonSerializer userCacheSerializer,
                          FileManager fileManager, ThreadExecutor executor) {
         if (context == null || userCacheSerializer == null || fileManager == null || executor == null) {
             throw new IllegalArgumentException("Invalid null parameter");

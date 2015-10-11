@@ -1,0 +1,57 @@
+/*
+ *   Copyright (C) 2015 Sitexa Open Source Project
+ *   <p>
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *   <p>
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *   <p>
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
+
+package com.sitexa.android.data.module.site.repository;
+
+import com.sitexa.android.data.module.site.entity.mapper.SiteEntityDataMapper;
+import com.sitexa.android.data.module.site.repository.datasource.SiteDataStore;
+import com.sitexa.android.data.module.site.repository.datasource.SiteDataStoreFactory;
+import com.sitexa.android.domain.Site;
+import com.sitexa.android.domain.repository.SiteRepository;
+
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import rx.Observable;
+
+/**
+ * Created by xnpeng on 15-10-8.
+ */
+@Singleton
+public class SiteDataRepository implements SiteRepository {
+
+    private final SiteDataStoreFactory siteDataStoreFactory;
+    private final SiteEntityDataMapper siteEntityDataMapper;
+
+    @Inject
+    public SiteDataRepository(SiteDataStoreFactory siteDataStoreFactory,
+                              SiteEntityDataMapper siteEntityDataMapper) {
+        this.siteDataStoreFactory = siteDataStoreFactory;
+        this.siteEntityDataMapper = siteEntityDataMapper;
+    }
+
+    @Override
+    public Observable<List<Site>> sites() {
+        return null;
+    }
+
+    @Override
+    public Observable<Site> site(String siteId) {
+        return null;
+    }
+}

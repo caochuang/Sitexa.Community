@@ -14,35 +14,32 @@
  *   limitations under the License.
  */
 
-package com.sitexa.android.domain.interactor;
+package com.sitexa.android.domain.interactor.site;
 
 import com.sitexa.android.domain.executor.PostExecutionThread;
 import com.sitexa.android.domain.executor.ThreadExecutor;
-import com.sitexa.android.domain.repository.BlogRepository;
-
-import javax.inject.Inject;
+import com.sitexa.android.domain.interactor.UseCase;
+import com.sitexa.android.domain.repository.SiteRepository;
 
 import rx.Observable;
 
 /**
- * Created by xnpeng on 15-9-5.
+ * Created by xnpeng on 15-9-30.
  */
-public class GetBlogDetails extends UseCase {
+public class GetSiteList extends UseCase {
 
-    private final long blogId;
-    private final BlogRepository blogRepository;
+    private final SiteRepository siteRepository;
 
-    @Inject
-    public GetBlogDetails(long blogId, BlogRepository blogRepository,
-                          ThreadExecutor threadExecutor,
-                          PostExecutionThread postExecutionThread) {
+    public GetSiteList(ThreadExecutor threadExecutor,
+                       PostExecutionThread postExecutionThread,
+                       SiteRepository siteRepository) {
+
         super(threadExecutor, postExecutionThread);
-        this.blogId = blogId;
-        this.blogRepository = blogRepository;
+        this.siteRepository = siteRepository;
     }
 
     @Override
-    protected Observable buildUseCaseObservable() {
-        return this.blogRepository.blog(this.blogId);
+    protected Observable buildUseCaseObservable(Object... param) {
+        return this.siteRepository.sites();
     }
 }

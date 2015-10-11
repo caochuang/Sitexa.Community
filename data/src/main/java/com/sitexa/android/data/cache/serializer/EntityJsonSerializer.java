@@ -16,7 +16,17 @@
 
 package com.sitexa.android.data.cache.serializer;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+import com.sitexa.android.data.entity.UserEntity;
+import com.sitexa.android.data.net.okhttp.ApiResult;
+
+import java.io.Serializable;
+import java.lang.reflect.Type;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -26,11 +36,9 @@ import javax.inject.Singleton;
  * 写一个通用类，用来对json和entity进行序列化和反系列化.
  */
 @Singleton
-public class EntityJsonSerializer {
+public class EntityJsonSerializer implements Serializable {
 
-    static Class<?> instance = null;
-
-    private final Gson gson = new Gson();
+    private final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     @Inject
     public EntityJsonSerializer() {
@@ -41,11 +49,14 @@ public class EntityJsonSerializer {
         return jsonString;
     }
 
-    //如何获取运行时泛型的class?
-    public <T> T deserialize(String jsonString) {
-        instance = (Class<T>) new Object();
-        T entity = (T) gson.fromJson(jsonString, instance.getClass());
-        return entity;
+    public <T> T deserialize(String jsonString, Class<?> aClass) {
+        try {
+            Object entity = this.gson.fromJson(jsonString, aClass);
+            return (T) entity;
+        } catch (JsonSyntaxException e) {
+            Log.e(this.getClass().getCanonicalName(), e.getMessage(), e);
+        }
+        return null;
     }
 
 }

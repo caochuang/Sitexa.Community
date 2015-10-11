@@ -14,11 +14,12 @@
  *   limitations under the License.
  */
 
-package com.sitexa.android.domain.interactor;
+package com.sitexa.android.domain.interactor.post;
 
 import com.sitexa.android.domain.executor.PostExecutionThread;
 import com.sitexa.android.domain.executor.ThreadExecutor;
-import com.sitexa.android.domain.repository.CommunityRepository;
+import com.sitexa.android.domain.interactor.UseCase;
+import com.sitexa.android.domain.repository.PostRepository;
 
 import javax.inject.Inject;
 
@@ -27,20 +28,20 @@ import rx.Observable;
 /**
  * Created by xnpeng on 15-9-5.
  */
-public class GetCommunityList extends UseCase {
+public class GetPostList extends UseCase {
 
-    private final CommunityRepository communityRepository;
+    private final PostRepository postRepository;
 
     @Inject
-    public GetCommunityList(CommunityRepository communityRepository,
-                            ThreadExecutor threadExecutor,
-                            PostExecutionThread postExecutionThread) {
-        super(threadExecutor, postExecutionThread);
-        this.communityRepository = communityRepository;
+    public GetPostList(PostRepository postRepository,
+                       ThreadExecutor threadExecutor,
+                       PostExecutionThread postExecutionThread){
+        super(threadExecutor,postExecutionThread);
+        this.postRepository = postRepository;
     }
 
     @Override
-    protected Observable buildUseCaseObservable() {
-        return this.communityRepository.communities();
+    protected Observable buildUseCaseObservable(Object... param) {
+        return this.postRepository.posts();
     }
 }

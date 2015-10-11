@@ -29,13 +29,10 @@ import java.util.List;
 
 public class ApiResult implements Serializable {
 
+    private final static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
     private int code;
-
     private String originalCode;
-
     private String value;
-
-    private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     public int getCode() {
         return code;
@@ -61,12 +58,6 @@ public class ApiResult implements Serializable {
         this.originalCode = originalCode;
     }
 
-    /**
-     * 将json转换为对应的实体对象
-     *
-     * @param aClass
-     * @return
-     */
     public <T> T getDomain(Class<?> aClass) {
         if (CodeConstants.ApiCode.NETWORK_ERROR == code) {
             return null;
@@ -82,21 +73,15 @@ public class ApiResult implements Serializable {
 
     }
 
-
-    /**
-     * 将json转换为对应的实体对象集合
-     *
-     * @return
-     */
     public <T> List<T> getDomainList(Type type) {
         if (CodeConstants.ApiCode.NETWORK_ERROR == code) {
             return null;
         }
         try {
-            Log.d(this.getClass().getCanonicalName(),value + "");
+            Log.d(this.getClass().getCanonicalName(), value + "");
             return gson.fromJson(value, type);
         } catch (JsonSyntaxException e) {
-            Log.e(this.getClass().getCanonicalName(),e.getMessage(), e);
+            Log.e(this.getClass().getCanonicalName(), e.getMessage(), e);
         }
         return null;
     }

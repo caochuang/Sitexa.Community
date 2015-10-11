@@ -30,6 +30,12 @@
             android:name="com.sitexa.android.community.view.activity.UserDetailsActivity"
             android:label="@string/activity_title_user_details">
         </activity>
+
+        <activity
+            android:name="com.sitexa.android.community.view.activity.UserLoginActivity"
+            android:label="@string/activity_title_user_login">
+        </activity>
+
     </application>
 
 </manifest>

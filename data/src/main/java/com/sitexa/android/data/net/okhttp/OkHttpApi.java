@@ -194,12 +194,6 @@ public class OkHttpApi implements Callable<String> {
         return okHttpClient;
     }
 
-    /**
-     * Do a request to an api synchronously.
-     * It should not be executed in the main thread of the application.
-     *
-     * @return A string response
-     */
     @Override
     public String call() {
         if (this.requestBody != null)

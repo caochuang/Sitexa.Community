@@ -14,10 +14,11 @@
  *   limitations under the License.
  */
 
-package com.sitexa.android.domain.interactor;
+package com.sitexa.android.domain.interactor.group;
 
 import com.sitexa.android.domain.executor.PostExecutionThread;
 import com.sitexa.android.domain.executor.ThreadExecutor;
+import com.sitexa.android.domain.interactor.UseCase;
 import com.sitexa.android.domain.repository.GroupRepository;
 
 import javax.inject.Inject;
@@ -27,20 +28,22 @@ import rx.Observable;
 /**
  * Created by xnpeng on 15-9-5.
  */
-public class GetGroupList extends UseCase {
+public class GetGroupDetails extends UseCase {
 
+    private final long groupId;
     private final GroupRepository groupRepository;
 
     @Inject
-    public GetGroupList(GroupRepository groupRepository,
-                        ThreadExecutor threadExecutor,
-                        PostExecutionThread postExecutionThread) {
+    public GetGroupDetails(long groupId, GroupRepository groupRepository,
+                           ThreadExecutor threadExecutor,
+                           PostExecutionThread postExecutionThread) {
         super(threadExecutor, postExecutionThread);
+        this.groupId = groupId;
         this.groupRepository = groupRepository;
     }
 
     @Override
-    protected Observable buildUseCaseObservable() {
-        return this.groupRepository.groups();
+    protected Observable buildUseCaseObservable(Object... param) {
+        return this.groupRepository.group(this.groupId);
     }
 }

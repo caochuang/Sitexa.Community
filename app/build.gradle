@@ -70,7 +70,10 @@ dependencies {
     compile presentationDependencies.recyclerView
     compile presentationDependencies.rxJava
     compile presentationDependencies.rxAndroid
+    //compile presentationDependencies.rxJavaAndroid
+    compile presentationDependencies.circleImageView
     provided presentationDependencies.javaxAnnotation
+
     androidTestCompile presentationTestDependencies.mockito
     androidTestCompile presentationTestDependencies.dexmaker
     androidTestCompile presentationTestDependencies.dexmakerMockito

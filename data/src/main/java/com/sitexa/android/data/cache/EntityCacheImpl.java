@@ -19,7 +19,6 @@ package com.sitexa.android.data.cache;
 import android.content.Context;
 
 import com.sitexa.android.data.cache.serializer.EntityJsonSerializer;
-import com.sitexa.android.data.entity.BaseEntity;
 import com.sitexa.android.data.exception.EntityNotFoundException;
 import com.sitexa.android.domain.executor.ThreadExecutor;
 
@@ -41,36 +40,34 @@ public class EntityCacheImpl implements EntityCache {
     private static final String SETTINGS_FILE_NAME = "com.sitexa.android.SETTINGS";
     private static final String SETTINGS_KEY_LAST_CACHE_UPDATE = "last_cache_update";
 
-    private static final String DEFAULT_FILE_NAME = "entity_";
+    //private static final String DEFAULT_FILE_NAME = "entity_";
     private static final long EXPIRATION_TIME = 60 * 10 * 1000;
 
     private final Context context;
-    private final EntityJsonSerializer serializer;
+    private final EntityJsonSerializer serializer = new EntityJsonSerializer();
     private final File cacheDir;
     private final FileManager fileManager;
     private final ThreadExecutor threadExecutor;
 
     @Inject
-    public EntityCacheImpl(Context context, EntityJsonSerializer serializer, File cacheDir, FileManager fileManager, ThreadExecutor threadExecutor) {
-        if (context == null || serializer == null || fileManager == null || threadExecutor == null) {
+    public EntityCacheImpl(Context context, File cacheDir, FileManager fileManager, ThreadExecutor threadExecutor) {
+        if (context == null || fileManager == null || threadExecutor == null) {
             throw new IllegalArgumentException("Invalid null parameter");
         }
         this.context = context;
-        this.serializer = serializer;
         this.cacheDir = cacheDir;
         this.fileManager = fileManager;
         this.threadExecutor = threadExecutor;
     }
 
     @Override
-    public synchronized <T> Observable<T> get(long id) {
+    public synchronized <T> Observable<T> get(String id, Class<?> aClass) {
         return Observable.create(new Observable.OnSubscribe<T>() {
             @Override
             public void call(Subscriber<? super T> subscriber) {
                 File entityFile = EntityCacheImpl.this.buildFile(id);
                 String fileContent = EntityCacheImpl.this.fileManager.readFileContent(entityFile);
-                T entity = EntityCacheImpl.this.serializer.deserialize(fileContent);
-
+                T entity = EntityCacheImpl.this.serializer.deserialize(fileContent, aClass);
                 if (entity != null) {
                     subscriber.onNext(entity);
                     subscriber.onCompleted();
@@ -81,13 +78,11 @@ public class EntityCacheImpl implements EntityCache {
         });
     }
 
-    //todo  check this method
     @Override
-    public synchronized <T> void put(T entity) {
+    public synchronized <T> void put(String id, T entity) {
         if (entity != null) {
-            BaseEntity be = (BaseEntity)entity;//这样转换有问题吗？
-            File entityFile = this.buildFile(be.getId());
-            if (!isCached(be.getId())) {
+            File entityFile = this.buildFile(id);
+            if (!isCached(id)) {
                 String jsonString = this.serializer.serialize(entity);
                 this.executeAsynchronously(new CacheWriter(this.fileManager, entityFile, jsonString));
                 setLastCacheUpdateTimeMillis();
@@ -96,7 +91,7 @@ public class EntityCacheImpl implements EntityCache {
     }
 
     @Override
-    public boolean isCached(long id) {
+    public boolean isCached(String id) {
         File entityFile = this.buildFile(id);
         return this.fileManager.exists(entityFile);
     }
@@ -126,11 +121,15 @@ public class EntityCacheImpl implements EntityCache {
      * @param id The id user to build the file.
      * @return A valid file.
      */
-    private File buildFile(long id) {
+    private File buildFile(String id) {
+        //todo Check this line,Can I get the filename from this.getClass()?
+        String filename = this.getClass().getSimpleName();
+
         StringBuilder fileNameBuilder = new StringBuilder();
         fileNameBuilder.append(this.cacheDir.getPath());
         fileNameBuilder.append(File.separator);
-        fileNameBuilder.append(DEFAULT_FILE_NAME);
+        //fileNameBuilder.append(DEFAULT_FILE_NAME);
+        fileNameBuilder.append(filename);
         fileNameBuilder.append(id);
 
         return new File(fileNameBuilder.toString());
@@ -160,43 +159,5 @@ public class EntityCacheImpl implements EntityCache {
      */
     private void executeAsynchronously(Runnable runnable) {
         this.threadExecutor.execute(runnable);
-    }
-
-    /**
-     * {@link Runnable} class for writing to disk.
-     */
-    private static class CacheWriter implements Runnable {
-        private final FileManager fileManager;
-        private final File fileToWrite;
-        private final String fileContent;
-
-        CacheWriter(FileManager fileManager, File fileToWrite, String fileContent) {
-            this.fileManager = fileManager;
-            this.fileToWrite = fileToWrite;
-            this.fileContent = fileContent;
-        }
-
-        @Override
-        public void run() {
-            this.fileManager.writeToFile(fileToWrite, fileContent);
-        }
-    }
-
-    /**
-     * {@link Runnable} class for evicting all the cached files
-     */
-    private static class CacheEvictor implements Runnable {
-        private final FileManager fileManager;
-        private final File cacheDir;
-
-        CacheEvictor(FileManager fileManager, File cacheDir) {
-            this.fileManager = fileManager;
-            this.cacheDir = cacheDir;
-        }
-
-        @Override
-        public void run() {
-            this.fileManager.clearDirectory(this.cacheDir);
-        }
     }
 }

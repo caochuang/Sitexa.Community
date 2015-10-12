@@ -57,7 +57,7 @@ public abstract class UseCase {
      */
     @SuppressWarnings("unchecked")
     public void execute(Subscriber UseCaseSubscriber, Object... param) {
-        this.subscription = this.buildUseCaseObservable()
+        this.subscription = this.buildUseCaseObservable(param)
                 .subscribeOn(Schedulers.from(threadExecutor))
                 .observeOn(postExecutionThread.getScheduler())
                 .lift(new OperatorSynchronousUnsubscribe())

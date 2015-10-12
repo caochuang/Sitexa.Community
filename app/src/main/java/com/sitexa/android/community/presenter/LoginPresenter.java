@@ -36,6 +36,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
+ * User login function. When logged in, save current user to application context,
+ * then navigate to then main activity.
  * Created by xnpeng on 15-10-9.
  */
 public class LoginPresenter implements Presenter {
@@ -57,7 +59,7 @@ public class LoginPresenter implements Presenter {
 
 
     public void initialize(){
-        this.showViewLoading();
+        this.hideViewLoading();
         this.hideViewRetry();
     }
 
@@ -107,7 +109,7 @@ public class LoginPresenter implements Presenter {
     }
 
     //////////for Model//////////
-    private void performLogin(String username, String password, String imei, String userAgent) {
+    public void doLogin(String username, String password, String imei, String userAgent) {
         Map<String, String> fields = new HashMap<>();
         fields.put("username", username);
         fields.put("password", password);
@@ -128,7 +130,7 @@ public class LoginPresenter implements Presenter {
         public void onError(Throwable e) {
             LoginPresenter.this.hideViewLoading();
             LoginPresenter.this.showErrorMessage(new DefaultErrorBundle((Exception) e));
-            LoginPresenter.this.showViewRetry();
+            LoginPresenter.this.hideViewRetry();
         }
 
         @Override

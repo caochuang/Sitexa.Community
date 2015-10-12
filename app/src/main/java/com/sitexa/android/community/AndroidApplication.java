@@ -16,6 +16,10 @@
 package com.sitexa.android.community;
 
 import android.app.Application;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import com.sitexa.android.community.internal.di.components.ApplicationComponent;
 import com.sitexa.android.community.internal.di.components.DaggerApplicationComponent;
@@ -26,12 +30,22 @@ import com.sitexa.android.community.internal.di.modules.ApplicationModule;
  */
 public class AndroidApplication extends Application {
 
+    protected static final String TAG = "[AndroidApplication]";
+    public static int versionCode;
+    public static String versionName;
+    public static String packageName;
+    public static PackageInfo packageInfo;
+    public static String deviceId;
+    private static AndroidApplication applicationContext;
     private ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
         this.initializeInjector();
+
+        applicationContext = this;
+        initAppInfo();
     }
 
     private void initializeInjector() {
@@ -42,5 +56,22 @@ public class AndroidApplication extends Application {
 
     public ApplicationComponent getApplicationComponent() {
         return this.applicationComponent;
+    }
+
+    private void initAppInfo() {
+        try {
+            PackageManager pm = getPackageManager();
+            packageInfo = pm.getPackageInfo(getPackageName(), 0);
+            packageName = packageInfo.packageName;
+            versionCode = packageInfo.versionCode;
+            versionName = packageInfo.versionName;
+            deviceId = ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).getDeviceId();
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, e.getMessage(), e);
+        }
+    }
+
+    public static AndroidApplication getContext() {
+        return applicationContext;
     }
 }

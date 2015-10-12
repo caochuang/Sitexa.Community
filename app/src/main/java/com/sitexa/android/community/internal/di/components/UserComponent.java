@@ -20,6 +20,7 @@ import com.sitexa.android.community.internal.di.modules.ActivityModule;
 import com.sitexa.android.community.internal.di.modules.UserModule;
 import com.sitexa.android.community.view.fragment.UserDetailsFragment;
 import com.sitexa.android.community.view.fragment.UserListFragment;
+import com.sitexa.android.community.view.fragment.UserLoginFragment;
 
 import dagger.Component;
 
@@ -33,4 +34,6 @@ public interface UserComponent extends ActivityComponent {
     void inject(UserListFragment userListFragment);
 
     void inject(UserDetailsFragment userDetailsFragment);
+
+    void inject(UserLoginFragment userLoginFragment);
 }

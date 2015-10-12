@@ -163,7 +163,6 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
     /////////this///////////
     @OnClick(R.id.bt_retry)
     void onButtonRetryClick() {
-        //this.loadUserDetails();
         if (this.userDetailsPresenter != null) {
             this.userDetailsPresenter.initialize(this.userId);
         }

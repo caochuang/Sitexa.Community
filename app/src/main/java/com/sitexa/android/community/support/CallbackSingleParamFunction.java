@@ -14,14 +14,9 @@
  *   limitations under the License.
  */
 
-package com.sitexa.android.community.view;
+package com.sitexa.android.community.support;
 
-import com.sitexa.android.community.model.UserModel;
+public interface CallbackSingleParamFunction<T> {
 
-/**
- * Created by xnpeng on 15-10-9.
- */
-public interface UserLoginView extends LoadDataView {
-
-    void renderLoginSuccess(UserModel userModel);
+    void callback(T value);
 }

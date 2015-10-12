@@ -20,6 +20,7 @@ import android.content.Intent;
 
 import com.sitexa.android.community.view.activity.UserDetailsActivity;
 import com.sitexa.android.community.view.activity.UserListActivity;
+import com.sitexa.android.community.view.activity.UserLoginActivity;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -55,6 +56,13 @@ public class Navigator {
     public void navigateToUserDetails(Context context, long userId) {
         if (context != null) {
             Intent intentToLaunch = UserDetailsActivity.getCallingIntent(context, userId);
+            context.startActivity(intentToLaunch);
+        }
+    }
+
+    public void navigateToUserLogin(Context context) {
+        if (context != null) {
+            Intent intentToLaunch = UserLoginActivity.getCallingIntent(context);
             context.startActivity(intentToLaunch);
         }
     }

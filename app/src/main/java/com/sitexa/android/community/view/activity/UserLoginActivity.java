@@ -25,11 +25,17 @@ import com.sitexa.android.community.R;
 import com.sitexa.android.community.internal.di.HasComponent;
 import com.sitexa.android.community.internal.di.components.DaggerUserComponent;
 import com.sitexa.android.community.internal.di.components.UserComponent;
+import com.sitexa.android.community.model.UserModel;
+import com.sitexa.android.community.navigation.Navigator;
+import com.sitexa.android.community.view.fragment.UserLoginFragment;
+
+import javax.inject.Inject;
 
 /**
  * Created by xnpeng on 15-10-9.
  */
-public class UserLoginActivity extends BaseActivity implements HasComponent<UserComponent> {
+public class UserLoginActivity extends BaseActivity implements HasComponent<UserComponent>,
+        UserLoginFragment.UserLoginListener {
 
     static final String TAG = UserLoginActivity.class.getCanonicalName();
 
@@ -45,7 +51,6 @@ public class UserLoginActivity extends BaseActivity implements HasComponent<User
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_user_login);
 
-        //this.initializeInjector();
         this.userComponent = DaggerUserComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
@@ -55,5 +60,9 @@ public class UserLoginActivity extends BaseActivity implements HasComponent<User
     @Override
     public UserComponent getComponent() {
         return userComponent;
+    }
+
+    public void loadUser(UserModel userModel) {
+        this.navigator.navigateToUserList(this);
     }
 }

@@ -14,7 +14,7 @@
  *   limitations under the License.
  */
 
-package com.sitexa.android.data.utils;
+package com.sitexa.android.community.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,7 +31,6 @@ import java.util.regex.Pattern;
 public class StringUtil extends StringUtils {
 
 
-    //begin by wubi
     private final static Pattern emailer = Pattern
             .compile("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
 

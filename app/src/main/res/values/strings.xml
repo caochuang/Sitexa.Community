@@ -3,6 +3,11 @@
     <string name="app_name">Sitexa</string>
     <string name="url">http://www.sitexa.org/</string>
 
+    <string name="cancel">Cancel</string>
+    <string name="prompt">Prompt</string>
+    <string name="ok">OK</string>
+
+
     <string name="activity_title_user_list">Users List</string>
     <string name="activity_title_user_details">User Details</string>
     <string name="activity_title_user_login">User Login</string>
@@ -12,6 +17,8 @@
     <string name="login_text">Login</string>
     <string name="username_enter_hint">username</string>
     <string name="password_enter_hint">password</string>
+    <string name="please_enter_username">Please enter username</string>
+    <string name="please_enter_password">Please enter password</string>
 
 
     ////////////////////////////////////////////////////////////

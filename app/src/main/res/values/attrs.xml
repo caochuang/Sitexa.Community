@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ClearEditText">
+        <!-- 触控区X轴微调 -->
+        <attr name="touch_offset_x" format="dimension" />
+
+        <!-- 图标大小微调 -->
+        <attr name="offset_y" format="dimension" />
+
+        <!-- 右侧位图 -->
+        <attr name="right_drawable" format="reference" />
+    </declare-styleable>
+
+</resources>

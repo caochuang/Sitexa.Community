@@ -1,40 +1,51 @@
 <resources>
 
-  <!-- Base application theme. -->
-  <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-  </style>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar"/>
 
-  <style name="AppTheme.ProgressBar">
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_centerInParent">true</item>
-    <item name="android:layout_gravity">center</item>
-    <item name="android:visibility">visible</item>
-  </style>
+    <style name="AppTheme.ProgressBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:visibility">visible</item>
+    </style>
 
-  <style name="AppTheme.Button">
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_centerVertical">true</item>
-    <item name="android:layout_centerHorizontal">true</item>
-    <item name="android:layout_gravity">center</item>
-  </style>
+    <style name="AppTheme.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
 
-  <style name="AppTheme.TextViewHeader">
-    <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_marginBottom">@dimen/header_margin</item>
-    <item name="android:textSize">@dimen/header_text_size</item>
-    <item name="android:textStyle">bold</item>
-    <item name="android:gravity">center</item>
-    <item name="android:background">@android:color/background_light</item>
-  </style>
+    <style name="AppTheme.TextViewHeader">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/header_margin</item>
+        <item name="android:textSize">@dimen/header_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@android:color/background_light</item>
+    </style>
 
-  <style name="AppTheme.TextViewTitle">
-    <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_marginTop">@dimen/header_margin</item>
-    <item name="android:textStyle">bold</item>
-  </style>
+    <style name="AppTheme.TextViewTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/header_margin</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MenuDialog" parent="android:style/Theme.Dialog">
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="Spinner">
+        <item name="android:indeterminate">true</item>
+        <item name="android:indeterminateDrawable">@drawable/bg_common_spinner</item>
+        <item name="android:indeterminateDuration">2000</item>
+        <item name="android:indeterminateOnly">true</item>
+    </style>
 
 </resources>

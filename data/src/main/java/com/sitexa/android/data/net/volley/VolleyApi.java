@@ -36,7 +36,8 @@ import com.sitexa.android.data.constant.ApplicationConstants;
 import com.sitexa.android.data.constant.CodeConstants;
 import com.sitexa.android.data.exception.NetworkConnectionException;
 import com.sitexa.android.data.net.okhttp.ApiResult;
-import com.sitexa.android.data.utils.StringUtil;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -153,7 +154,7 @@ public class VolleyApi {
                                     @Override
                                     protected Response<String> parseNetworkResponse(NetworkResponse response) {
                                         String setCookie = response.headers.get("Set-Cookie");
-                                        if (StringUtil.isNotEmpty(setCookie)) {
+                                        if (StringUtils.isNotEmpty(setCookie)) {
                                             mCookie = setCookie;
                                         }
                                         Log.d(TAG, "Response cookie " + mCookie);
@@ -180,7 +181,7 @@ public class VolleyApi {
                                     @Override
                                     public Map<String, String> getHeaders() throws AuthFailureError {
                                         Map<String, String> localHashMap = new HashMap<String, String>();
-                                        if (StringUtil.isNotEmpty(mCookie)) {
+                                        if (StringUtils.isNotEmpty(mCookie)) {
                                             localHashMap.put("Cookie", mCookie);
                                         }
                                         return localHashMap;
@@ -244,7 +245,7 @@ public class VolleyApi {
                                     @Override
                                     protected Response<String> parseNetworkResponse(NetworkResponse response) {
                                         String setCookie = response.headers.get("Set-Cookie");
-                                        if (StringUtil.isNotEmpty(setCookie)) {
+                                        if (StringUtils.isNotEmpty(setCookie)) {
                                             mCookie = setCookie;
                                         }
                                         Log.d(TAG, "Response cookie " + mCookie);
@@ -271,7 +272,7 @@ public class VolleyApi {
                                     @Override
                                     public Map<String, String> getHeaders() throws AuthFailureError {
                                         Map<String, String> localHashMap = new HashMap<String, String>();
-                                        if (StringUtil.isNotEmpty(mCookie)) {
+                                        if (StringUtils.isNotEmpty(mCookie)) {
                                             localHashMap.put("Cookie", mCookie);
                                         }
                                         return localHashMap;

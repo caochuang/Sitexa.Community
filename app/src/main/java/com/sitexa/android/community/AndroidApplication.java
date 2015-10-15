@@ -36,7 +36,6 @@ public class AndroidApplication extends Application {
     public static String packageName;
     public static PackageInfo packageInfo;
     public static String deviceId;
-    private static AndroidApplication applicationContext;
     private ApplicationComponent applicationComponent;
 
     @Override
@@ -44,7 +43,6 @@ public class AndroidApplication extends Application {
         super.onCreate();
         this.initializeInjector();
 
-        applicationContext = this;
         initAppInfo();
     }
 
@@ -71,7 +69,4 @@ public class AndroidApplication extends Application {
         }
     }
 
-    public static AndroidApplication getContext() {
-        return applicationContext;
-    }
 }

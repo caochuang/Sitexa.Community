@@ -39,4 +39,10 @@ public interface UserRepository {
     Observable<User> user(final long userId);
 
     Observable<User> userLogin(final Map<String, String> fields);
+
+    Observable<String> getVerifyCode(final Map<String, String> param);
+
+    Observable<String> sendVerifyCode(final Map<String, String> param);
+
+    Observable<String> setPassword(final Map<String, String> param);
 }

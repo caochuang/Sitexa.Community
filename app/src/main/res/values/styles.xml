@@ -48,4 +48,21 @@
         <item name="android:indeterminateOnly">true</item>
     </style>
 
+    <!--主题按钮样式-->
+    <style name="ThemeButton">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/btn_theme_color_selector</item>
+    </style>
+
+    <!--淡灰色按钮样式-->
+    <style name="GrayishButton">
+        <item name="android:background">@drawable/btn_grayish_selector</item>
+    </style>
+
+    <!--白色按钮样式-->
+    <style name="WhiteButton">
+        <item name="android:textColor">@color/btn_blue_gray_color_selector</item>
+        <item name="android:background">@drawable/btn_white_selector</item>
+    </style>
+
 </resources>

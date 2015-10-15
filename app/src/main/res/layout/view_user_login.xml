@@ -144,7 +144,6 @@
         android:layout_margin="10dp"
         android:autoLink="all"
         android:clickable="true"
-        android:onClick="findPassword"
         android:text="@string/find_password"
         android:textColor="#cfcfcf"
         android:textSize="16sp" />

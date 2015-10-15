@@ -19,6 +19,17 @@
     <string name="password_enter_hint">password</string>
     <string name="please_enter_username">Please enter username</string>
     <string name="please_enter_password">Please enter password</string>
+    <string name="password">Password</string>
+    <string name="password_again"> Again </string>
+    <string name="setting_login_password_hint">password</string>
+    <string name="setting_login_password_again_hint">password again</string>
+    <string name="getVerifyCode">Get Verify Code</string>
+    <string name="sendVerifyCode">Send Verify Code</string>
+    <string name="enter_mobile_no">Enter Mobile No</string>
+    <string name="enter_verify_code">Enter Verify Code</string>
+    <string name="mobile_no">Mobile No</string>
+    <string name="verify_code">Verify Code</string>
+    <string name="set_password">Set Password</string>
 
 
     ////////////////////////////////////////////////////////////
@@ -35,4 +46,6 @@
     <string name="exception_message_generic">There was an application error</string>
     <string name="exception_message_no_connection">There is no internet connection</string>
     <string name="exception_message_user_not_found">Cannot retrieve user data. Check your internet connection</string>
+    <string name="title_activity_find_password">Find Password</string>
+    <string name="title_activity_register_user">RegisterUserActivity</string>
 </resources>

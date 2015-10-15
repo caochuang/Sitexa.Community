@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (C) 2015 Sitexa Open Source Project
+  ~   <p>
+  ~   Licensed under the Apache License, Version 2.0 (the "License");
+  ~   you may not use this file except in compliance with the License.
+  ~   You may obtain a copy of the License at
+  ~   <p>
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~   <p>
+  ~   Unless required by applicable law or agreed to in writing, software
+  ~   distributed under the License is distributed on an "AS IS" BASIS,
+  ~   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~   See the License for the specific language governing permissions and
+  ~   limitations under the License.
+  -->
+
+<resources>
+    <color name="darkgray">#404040ff</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#0ff0ff</color>
+    <color name="lightgray">#c0c0c0ff</color>
+    <color name="yellow">#ffFF33ff</color>
+    <color name="gray">#ff666666</color>
+    <color name="text_gray2">#ffC3C3C3</color>
+    <color name="magenta">#ff6699ff</color>
+    <color name="cyan">#66ffffff</color>
+    <color name="transparent_black">#ff000000</color>
+    <color name="background_dark">#f0f0f0</color>
+    <color name="camera_bg">#2c2c2c</color>
+    <color name="camera_progress">#2980B9</color>
+    <color name="camera_progress_split">#005084</color>
+    <color name="camera_progress_three">#24ff00</color>
+    <color name="camera_progress_overflow">#1b5d89</color>
+    <color name="camera_theme_selected_bgcolor">#2980B9</color>
+    <color name="camera_bottom_press_bg">#1b1c1f</color>
+    <color name="title_background_color">#fcb840</color>
+    <color name="camera_progress_delete">#f68b2b</color>
+    <color name="translucent_background_80">#CC000000</color>
+    <color name="translucent_background_50">#7f000000</color>
+    <color name="transparent_black_40">#66000000</color>
+    <color name="transparent_black_85">#DA000000</color>
+    <color name="transparent_black_30">#4D000000</color>
+    <color name="font_attribute">#ff000000</color>
+    <color name="color_bottom_text_normal">#9da0a4</color>
+    <color name="guide_color">#898989</color>
+    <color name="base_bg">#f4f6f6</color>
+    <color name="base_actionbar_bg">#f5f5f5</color>
+    <color name="base_color_text_gray">#9fa0a0</color>
+    <color name="dialog_color_title">#f82c22</color>
+    <color name="msg_chat_bg">#eceff4</color>
+    <color name="province_line_border">#C7C7C7</color>
+
+    <!-- emot -->
+    <color name="msg_emote_divider">#ffa1a1a1</color>
+
+    <color name="albumback">#E1E0DE</color>
+    <color name="none_color">#00000000</color>
+    <color name="nor_clickable">#E1E0DE</color>
+
+
+    <color name="black_semi_transparent">#B2000000</color>
+    <color name="background">#e5e5e5</color>
+    <color name="half_black">#808080</color>
+    <color name="pink">#e91e63</color>
+    <color name="pink_pressed">#ec407a</color>
+    <color name="blue_semi_transparent">#805677fc</color>
+    <color name="blue_semi_transparent_pressed">#80738ffe</color>
+
+    <!-- 标题文字 -->
+    <color name="color_23232b">#23232b</color>
+
+    <color name="video_double_back">#1c1b20</color>
+    <!-- 辅助文字 -->
+    <color name="color_919191">#919191</color>
+    <color name="publish_at_line">#FF434345</color>
+    <color name="main_bg_color">#e7e7e7</color>
+
+    <color name="bfbfbf">#bfbfbf</color>
+    <color name="cfcfcf">#cfcfcf</color>
+    <color name="efefef">#efefef</color>
+    <color name="dfdfdf">#dfdfdf</color>
+    <color name="fff9f9f9">#fff9f9f9</color>
+    <color name="ms_blue">#00a1f1</color>
+    <color name="e2e2e2">#e2e2e2</color>
+
+</resources>

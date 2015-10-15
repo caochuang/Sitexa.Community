@@ -18,6 +18,8 @@ package com.sitexa.android.community.navigation;
 import android.content.Context;
 import android.content.Intent;
 
+import com.sitexa.android.community.view.activity.FindPasswordActivity;
+import com.sitexa.android.community.view.activity.RegisterUserActivity;
 import com.sitexa.android.community.view.activity.UserDetailsActivity;
 import com.sitexa.android.community.view.activity.UserListActivity;
 import com.sitexa.android.community.view.activity.UserLoginActivity;
@@ -27,6 +29,8 @@ import javax.inject.Singleton;
 
 /**
  * Class used to navigate through the application.
+ * Comment: One Navigator for whole project is not enough, there must bu ModuleNavigator for each module,
+ * Or, instead of Navigator , directly use context.startActivity(intentToLaunch).
  */
 @Singleton
 public class Navigator {
@@ -66,4 +70,18 @@ public class Navigator {
             context.startActivity(intentToLaunch);
         }
     }
+
+ /*    public void navigateToFindPassword(Context context) {
+        if (context != null) {
+            Intent intentToLaunch = FindPasswordActivity.getCallingIntent(context);
+            context.startActivity(intentToLaunch);
+        }
+    }
+
+    public void navigateToRegisterUser(Context context) {
+        if (context != null) {
+            Intent intentToLaunch = RegisterUserActivity.getCallingIntent(context);
+            context.startActivity(intentToLaunch);
+        }
+    }*/
 }

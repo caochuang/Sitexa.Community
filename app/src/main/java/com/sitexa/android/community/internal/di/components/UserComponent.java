@@ -18,6 +18,9 @@ package com.sitexa.android.community.internal.di.components;
 import com.sitexa.android.community.internal.di.PerActivity;
 import com.sitexa.android.community.internal.di.modules.ActivityModule;
 import com.sitexa.android.community.internal.di.modules.UserModule;
+import com.sitexa.android.community.view.activity.FindPasswordActivity;
+import com.sitexa.android.community.view.activity.RegisterUserActivity;
+import com.sitexa.android.community.view.activity.UserLoginActivity;
 import com.sitexa.android.community.view.fragment.UserDetailsFragment;
 import com.sitexa.android.community.view.fragment.UserListFragment;
 import com.sitexa.android.community.view.fragment.UserLoginFragment;
@@ -36,4 +39,10 @@ public interface UserComponent extends ActivityComponent {
     void inject(UserDetailsFragment userDetailsFragment);
 
     void inject(UserLoginFragment userLoginFragment);
+
+    void inject(FindPasswordActivity findPasswordActivity);
+
+    void inject(UserLoginActivity userLoginActivity);
+
+    void inject(RegisterUserActivity registerUserActivity);
 }

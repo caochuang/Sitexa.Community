@@ -16,16 +16,30 @@
 
 package com.sitexa.android.community.view;
 
-import com.sitexa.android.community.model.UserModel;
-
 /**
- * Created by xnpeng on 15-10-9.
+ * Created by xnpeng on 15-10-12.
  */
-public interface UserLoginView extends LoadDataView {
+public interface FindPasswordView {
 
-    void loginSuccess(UserModel userModel);
+    void getVerifyCode();
 
-    void findPassword();
+    void sendVerifyCode();
 
-    void registerUser();
+    void setPassword();
+
+    void forwardToLoginActivity();
+
+    void showGetVerifyCodeView();
+
+    void hideGetVerifyCodeView();
+
+    void showSendVerifyCodeView();
+
+    void hideSendVerifyCodeView();
+
+    void showSetPasswordView();
+
+    void hideSetPasswordView();
+
+    void showError(String message);
 }

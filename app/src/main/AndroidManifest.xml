@@ -1,42 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sitexa.android.community">
-
+    package="com.sitexa.android.community" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
+        android:name=".AndroidApplication"
         android:allowBackup="true"
-        android:name="com.sitexa.android.community.AndroidApplication"
         android:icon="@drawable/sitexa"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme" >
         <activity
-            android:name="com.sitexa.android.community.view.activity.MainActivity"
-            android:label="@string/app_name">
+            android:name=".view.activity.MainActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.sitexa.android.community.view.activity.UserListActivity"
-            android:label="@string/activity_title_user_list">
+            android:name=".view.activity.UserListActivity"
+            android:label="@string/activity_title_user_list" >
         </activity>
-
         <activity
-            android:name="com.sitexa.android.community.view.activity.UserDetailsActivity"
-            android:label="@string/activity_title_user_details">
+            android:name=".view.activity.UserDetailsActivity"
+            android:label="@string/activity_title_user_details" >
         </activity>
-
         <activity
-            android:name="com.sitexa.android.community.view.activity.UserLoginActivity"
-            android:label="@string/activity_title_user_login">
+            android:name=".view.activity.UserLoginActivity"
+            android:label="@string/activity_title_user_login" >
         </activity>
-
+        <activity
+            android:name=".view.activity.FindPasswordActivity"
+            android:label="@string/title_activity_find_password" >
+        </activity>
+        <activity
+            android:name=".view.activity.RegisterUserActivity"
+            android:label="@string/title_activity_register_user" >
+        </activity>
     </application>
 
 </manifest>

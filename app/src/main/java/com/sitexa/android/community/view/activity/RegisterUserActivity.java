@@ -19,42 +19,34 @@ package com.sitexa.android.community.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Window;
+import android.app.Activity;
 
 import com.sitexa.android.community.R;
-import com.sitexa.android.community.internal.di.HasComponent;
 import com.sitexa.android.community.internal.di.components.DaggerUserComponent;
 import com.sitexa.android.community.internal.di.components.UserComponent;
-import com.sitexa.android.community.model.UserModel;
 import com.sitexa.android.community.navigation.UserNavigator;
-import com.sitexa.android.community.view.fragment.UserLoginFragment;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 
-/**
- * Created by xnpeng on 15-10-9.
- */
-public class UserLoginActivity extends BaseActivity implements HasComponent<UserComponent>,
-        UserLoginFragment.UserLoginListener {
-
-    static final String TAG = UserLoginActivity.class.getCanonicalName();
+public class RegisterUserActivity extends BaseActivity {
 
     @Inject
     UserNavigator userNavigator;
+    //@Inject
+    //RegisterUserPresenter registerUserPresenter;
 
     private UserComponent userComponent;
 
     public static Intent getCallingIntent(Context context) {
-        return new Intent(context, UserLoginActivity.class);
+        return new Intent(context, RegisterUserActivity.class);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        setContentView(R.layout.activity_user_login);
+        setContentView(R.layout.activity_register_user);
         ButterKnife.bind(this);
 
         this.userComponent = DaggerUserComponent.builder()
@@ -63,24 +55,7 @@ public class UserLoginActivity extends BaseActivity implements HasComponent<User
                 .build();
 
         this.userComponent.inject(this);
+
     }
 
-    @Override
-    public UserComponent getComponent() {
-        return userComponent;
-    }
-
-    public void toMainActivity(UserModel userModel) {
-        this.navigator.navigateToUserList(this);
-    }
-
-    @Override
-    public void toFindPassword() {
-        this.userNavigator.navigateToFindPassword(this);
-    }
-
-    @Override
-    public void toRegisterUser() {
-        this.userNavigator.navigateToRegisterUser(this);
-    }
 }

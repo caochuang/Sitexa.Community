@@ -103,9 +103,9 @@ public class LoginPresenter implements Presenter {
         this.userLoginView.showError(errorMessage);
     }
 
-    private void showLoginSuccessInView(User user) {
+    private void loginSuccess(User user) {
         final UserModel userModel = this.userModelDataMapper.transform(user);
-        this.userLoginView.renderLoginSuccess(userModel);
+        this.userLoginView.loginSuccess(userModel);
     }
 
     //////////for Model//////////
@@ -135,7 +135,7 @@ public class LoginPresenter implements Presenter {
 
         @Override
         public void onNext(User user) {
-            LoginPresenter.this.showLoginSuccessInView(user);
+            LoginPresenter.this.loginSuccess(user);
         }
     }
 }

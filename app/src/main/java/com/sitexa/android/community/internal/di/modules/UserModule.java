@@ -15,16 +15,24 @@
  */
 package com.sitexa.android.community.internal.di.modules;
 
+import com.sitexa.android.community.internal.di.PerActivity;
+import com.sitexa.android.community.navigation.Navigator;
+import com.sitexa.android.community.navigation.UserNavigator;
+import com.sitexa.android.community.presenter.FindPasswordPresenter;
+import com.sitexa.android.community.presenter.Presenter;
 import com.sitexa.android.domain.executor.PostExecutionThread;
 import com.sitexa.android.domain.executor.ThreadExecutor;
+import com.sitexa.android.domain.interactor.UseCase;
 import com.sitexa.android.domain.interactor.user.GetUserDetails;
 import com.sitexa.android.domain.interactor.user.GetUserList;
-import com.sitexa.android.domain.interactor.UseCase;
+import com.sitexa.android.domain.interactor.user.GetVerifyCode;
+import com.sitexa.android.domain.interactor.user.SendVerifyCode;
+import com.sitexa.android.domain.interactor.user.SetPassword;
 import com.sitexa.android.domain.interactor.user.UserLoginCase;
 import com.sitexa.android.domain.repository.UserRepository;
-import com.sitexa.android.community.internal.di.PerActivity;
 
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -48,6 +56,19 @@ public class UserModule {
     @PerActivity
     long provideUserId() {
         return userId;
+    }
+
+    @Provides
+    @PerActivity
+    Navigator provideNavigator() {
+        return new Navigator();
+    }
+
+
+    @Provides
+    @PerActivity
+    UserNavigator provideUserNavigator() {
+        return new UserNavigator();
     }
 
     /**
@@ -91,7 +112,43 @@ public class UserModule {
     @Named("userLogin")
     UseCase provideUserLoginUseCase(UserRepository userRepository,
                                     ThreadExecutor threadExecutor,
-                                    PostExecutionThread postExecutionThread){
-        return new UserLoginCase(userRepository,threadExecutor,postExecutionThread);
+                                    PostExecutionThread postExecutionThread) {
+        return new UserLoginCase(userRepository, threadExecutor, postExecutionThread);
+    }
+
+    @Provides
+    @PerActivity
+    @Named("getVerifyCode")
+    UseCase provideGetVerifyCode(UserRepository userRepository,
+                                 ThreadExecutor threadExecutor,
+                                 PostExecutionThread postExecutionThread) {
+        return new GetVerifyCode(userRepository, threadExecutor, postExecutionThread);
+    }
+
+    @Provides
+    @PerActivity
+    @Named("sendVerifyCode")
+    UseCase provideSendVerify(UserRepository userRepository,
+                              ThreadExecutor threadExecutor,
+                              PostExecutionThread postExecutionThread) {
+        return new SendVerifyCode(userRepository, threadExecutor, postExecutionThread);
+    }
+
+    @Provides
+    @PerActivity
+    @Named("setPassword")
+    UseCase provideSetPassword(UserRepository userRepository,
+                               ThreadExecutor threadExecutor,
+                               PostExecutionThread postExecutionThread) {
+        return new SetPassword(userRepository, threadExecutor, postExecutionThread);
+    }
+
+    @Provides
+    @PerActivity
+    @Named("findPasswordPresenter")
+    Presenter provideFindPasswordPresenter(GetVerifyCode getVerifyCode,
+                                           SendVerifyCode sendVerifyCode,
+                                           SetPassword setPassword){
+        return new FindPasswordPresenter(getVerifyCode,sendVerifyCode,setPassword);
     }
 }

@@ -78,4 +78,29 @@ public class UserDataRepository implements UserRepository {
         return userDataStore.userLogin(fields)
                 .map(entity -> this.userEntityDataMapper.transform(entity));
     }
+
+    @Override
+    public Observable<String> getVerifyCode(Map<String, String> param) {
+        Observable<String> myObservable = Observable.just("true");
+        return myObservable;
+
+        //final UserDataStore userDataStore = this.userDataStoreFactory.createCloudDataStore();
+        //return userDataStore.getVerifyCode(fields);
+    }
+
+    @Override
+    public Observable<String> sendVerifyCode(Map<String, String> param) {
+        Observable<String> myObservable = Observable.just("true");
+        return myObservable;
+        //final UserDataStore userDataStore = this.userDataStoreFactory.createCloudDataStore();
+        //return userDataStore.sendVerifyCode(fields);
+    }
+
+    @Override
+    public Observable<String> setPassword(Map<String, String> param) {
+        Observable<String> myObservable = Observable.just("true");
+        return myObservable;
+        //final UserDataStore userDataStore = this.userDataStoreFactory.createCloudDataStore();
+        //return userDataStore.setPassword(fields);
+    }
 }

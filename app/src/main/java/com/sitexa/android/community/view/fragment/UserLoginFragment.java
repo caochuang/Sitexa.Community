@@ -36,7 +36,6 @@ import com.sitexa.android.community.utils.StringUtil;
 import com.sitexa.android.community.utils.SystemUtil;
 import com.sitexa.android.community.utils.ViewUtil;
 import com.sitexa.android.community.view.UserLoginView;
-import com.sitexa.android.community.view.activity.UserLoginActivity;
 
 import javax.inject.Inject;
 
@@ -85,7 +84,7 @@ public class UserLoginFragment extends BaseFragment implements UserLoginView {
 
         this.getComponent(UserComponent.class).inject(this);
 
-        this.userLoginListener = (UserLoginListener)getActivity();
+        this.userLoginListener = (UserLoginListener) getActivity();
 
         this.loginPresenter.setView(this);
         this.loginPresenter.initialize();
@@ -151,9 +150,25 @@ public class UserLoginFragment extends BaseFragment implements UserLoginView {
 
     //////////UserLoginView//////////
     @Override
-    public void renderLoginSuccess(UserModel user) {
-        if(userLoginListener!=null){
-            userLoginListener.loadUser(user);
+    public void loginSuccess(UserModel user) {
+        if (userLoginListener != null) {
+            userLoginListener.toMainActivity(user);
+        }
+    }
+
+    @OnClick(R.id.find_password)
+    @Override
+    public void findPassword() {
+        if (userLoginListener != null) {
+            userLoginListener.toFindPassword();
+        }
+    }
+
+    @OnClick(R.id.register_user)
+    @Override
+    public void registerUser() {
+        if (userLoginListener != null) {
+            userLoginListener.toRegisterUser();
         }
     }
 
@@ -183,6 +198,10 @@ public class UserLoginFragment extends BaseFragment implements UserLoginView {
 
     //////////interface//////////
     public interface UserLoginListener {
-        void loadUser(final UserModel userModel);
+        void toMainActivity(final UserModel userModel);
+
+        void toFindPassword();
+
+        void toRegisterUser();
     }
 }

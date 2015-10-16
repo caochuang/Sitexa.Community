@@ -18,8 +18,6 @@ package com.sitexa.android.community.internal.di.modules;
 import com.sitexa.android.community.internal.di.PerActivity;
 import com.sitexa.android.community.navigation.Navigator;
 import com.sitexa.android.community.navigation.UserNavigator;
-import com.sitexa.android.community.presenter.FindPasswordPresenter;
-import com.sitexa.android.community.presenter.Presenter;
 import com.sitexa.android.domain.executor.PostExecutionThread;
 import com.sitexa.android.domain.executor.ThreadExecutor;
 import com.sitexa.android.domain.interactor.UseCase;
@@ -32,7 +30,6 @@ import com.sitexa.android.domain.interactor.user.UserLoginCase;
 import com.sitexa.android.domain.repository.UserRepository;
 
 import javax.inject.Named;
-import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -141,14 +138,5 @@ public class UserModule {
                                ThreadExecutor threadExecutor,
                                PostExecutionThread postExecutionThread) {
         return new SetPassword(userRepository, threadExecutor, postExecutionThread);
-    }
-
-    @Provides
-    @PerActivity
-    @Named("findPasswordPresenter")
-    Presenter provideFindPasswordPresenter(GetVerifyCode getVerifyCode,
-                                           SendVerifyCode sendVerifyCode,
-                                           SetPassword setPassword){
-        return new FindPasswordPresenter(getVerifyCode,sendVerifyCode,setPassword);
     }
 }

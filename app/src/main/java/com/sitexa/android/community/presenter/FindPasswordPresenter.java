@@ -19,6 +19,7 @@ package com.sitexa.android.community.presenter;
 import android.support.annotation.NonNull;
 
 import com.sitexa.android.community.exception.ErrorMessageFactory;
+import com.sitexa.android.community.internal.di.PerActivity;
 import com.sitexa.android.community.view.FindPasswordView;
 import com.sitexa.android.community.view.activity.FindPasswordActivity;
 import com.sitexa.android.domain.exception.DefaultErrorBundle;
@@ -35,6 +36,7 @@ import javax.inject.Named;
 /**
  * Created by xnpeng on 15-10-12.
  */
+@PerActivity
 public class FindPasswordPresenter implements Presenter {
 
     private final UseCase setPasswordUseCase;

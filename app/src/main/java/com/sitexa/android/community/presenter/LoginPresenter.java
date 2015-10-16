@@ -20,6 +20,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.sitexa.android.community.exception.ErrorMessageFactory;
+import com.sitexa.android.community.internal.di.PerActivity;
 import com.sitexa.android.community.mapper.UserModelDataMapper;
 import com.sitexa.android.community.model.UserModel;
 import com.sitexa.android.community.view.UserLoginView;
@@ -40,6 +41,7 @@ import javax.inject.Named;
  * then navigate to then main activity.
  * Created by xnpeng on 15-10-9.
  */
+@PerActivity
 public class LoginPresenter implements Presenter {
 
     private final static String TAG = LoginPresenter.class.getSimpleName();

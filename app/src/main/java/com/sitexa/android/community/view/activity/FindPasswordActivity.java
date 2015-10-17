@@ -109,6 +109,7 @@ public class FindPasswordActivity extends BaseActivity
     protected void onDestroy() {
         super.onDestroy();
         this.findPasswordPresenter.destroy();
+        ButterKnife.unbind(this);
     }
 
     @Override

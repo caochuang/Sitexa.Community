@@ -24,6 +24,7 @@ import com.sitexa.android.domain.interactor.UseCase;
 import com.sitexa.android.domain.interactor.user.GetUserDetails;
 import com.sitexa.android.domain.interactor.user.GetUserList;
 import com.sitexa.android.domain.interactor.user.GetVerifyCode;
+import com.sitexa.android.domain.interactor.user.RegisterUser;
 import com.sitexa.android.domain.interactor.user.SendVerifyCode;
 import com.sitexa.android.domain.interactor.user.SetPassword;
 import com.sitexa.android.domain.interactor.user.UserLoginCase;
@@ -138,5 +139,14 @@ public class UserModule {
                                ThreadExecutor threadExecutor,
                                PostExecutionThread postExecutionThread) {
         return new SetPassword(userRepository, threadExecutor, postExecutionThread);
+    }
+
+    @Provides
+    @PerActivity
+    @Named("registerUser")
+    UseCase provideRegisterUser(UserRepository userRepository,
+                               ThreadExecutor threadExecutor,
+                               PostExecutionThread postExecutionThread) {
+        return new RegisterUser(userRepository, threadExecutor, postExecutionThread);
     }
 }

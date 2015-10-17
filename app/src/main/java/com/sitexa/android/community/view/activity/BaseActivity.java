@@ -20,9 +20,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
+import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 
 import com.sitexa.android.community.AndroidApplication;
 import com.sitexa.android.community.internal.di.components.ApplicationComponent;
@@ -31,12 +35,18 @@ import com.sitexa.android.community.navigation.Navigator;
 
 import javax.inject.Inject;
 
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
+import me.imid.swipebacklayout.lib.Utils;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
+
 /**
  * Base {@link android.app.Activity} class for every Activity in this application.
  */
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends Activity implements SwipeBackActivityBase {
 
     static final String TAG = "[BaseActivity]";
+    private SwipeBackActivityHelper mHelper;
 
     @Inject
     Navigator navigator;
@@ -44,8 +54,68 @@ public abstract class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         this.getApplicationComponent().inject(this);
+        onInitSwipeBack();
     }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mHelper.onPostCreate();
+    }
+
+    private void onInitSwipeBack() {
+        mHelper = new SwipeBackActivityHelper(this);
+        mHelper.onActivityCreate();
+        getWindow().getDecorView().setBackgroundResource(0);
+        setSwipeBackEnable(false);
+        getSwipeBackLayout().setSensitivity(this, 0.2f);
+        DisplayMetrics metric = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metric);
+        mHelper.getSwipeBackLayout().setEdgeSize(metric.widthPixels);
+    }
+
+    @Override
+    public SwipeBackLayout getSwipeBackLayout() {
+        return mHelper.getSwipeBackLayout();
+    }
+
+    @Override
+    public void setSwipeBackEnable(boolean enable) {
+        getSwipeBackLayout().setEnableGesture(enable);
+        if (enable) {
+            getSwipeBackLayout().addSwipeListener(new SwipeBackLayout.SwipeListener() {
+                @Override
+                public void onScrollStateChange(int i, float v) {
+                }
+
+                @Override
+                public void onEdgeTouch(int i) {
+                    hideInputKeyboard();
+                }
+
+                @Override
+                public void onScrollOverThreshold() {
+                }
+            });
+        }
+    }
+
+    private void hideInputKeyboard() {
+        final View currentFocus = getCurrentFocus();
+        if (currentFocus != null) {
+            InputMethodManager imm = (InputMethodManager) currentFocus.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
+        }
+    }
+
+    @Override
+    public void scrollToFinishActivity() {
+        Utils.convertActivityToTranslucent(this);
+        getSwipeBackLayout().scrollToFinishActivity();
+    }
+
 
     /**
      * Adds a {@link Fragment} to this activity's layout.

@@ -45,4 +45,6 @@ public interface UserRepository {
     Observable<String> sendVerifyCode(final Map<String, String> param);
 
     Observable<String> setPassword(final Map<String, String> param);
+
+    Observable<String> registerUser(Map<String, String> param);
 }

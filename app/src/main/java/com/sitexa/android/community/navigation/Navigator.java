@@ -20,6 +20,7 @@ import android.content.Intent;
 
 import com.sitexa.android.community.view.activity.FindPasswordActivity;
 import com.sitexa.android.community.view.activity.RegisterUserActivity;
+import com.sitexa.android.community.view.activity.ServiceStatementActivity;
 import com.sitexa.android.community.view.activity.UserDetailsActivity;
 import com.sitexa.android.community.view.activity.UserListActivity;
 import com.sitexa.android.community.view.activity.UserLoginActivity;
@@ -70,6 +71,15 @@ public class Navigator {
             context.startActivity(intentToLaunch);
         }
     }
+
+    public void navigateToServiceStatement(Context context) {
+        if (context != null) {
+            Intent intentToLaunch = ServiceStatementActivity.getCallingIntent(context);
+            context.startActivity(intentToLaunch);
+        }
+    }
+
+
 
  /*    public void navigateToFindPassword(Context context) {
         if (context != null) {

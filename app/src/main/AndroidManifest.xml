@@ -41,6 +41,10 @@
             android:name=".view.activity.RegisterUserActivity"
             android:label="@string/title_activity_register_user" >
         </activity>
+        <activity
+            android:name=".view.activity.ServiceStatementActivity"
+            android:label="@string/title_activity_service_statement" >
+        </activity>
     </application>
 
 </manifest>

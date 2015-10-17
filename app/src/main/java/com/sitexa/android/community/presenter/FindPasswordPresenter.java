@@ -95,7 +95,6 @@ public class FindPasswordPresenter implements Presenter {
     //////////for Model//////////
     public void doGetVerifyCode() {
         final Map params = new HashMap();
-
         this.getVerifyCodeUseCase.execute(new GetVerifyCodeSubscriber(), params);
     }
 

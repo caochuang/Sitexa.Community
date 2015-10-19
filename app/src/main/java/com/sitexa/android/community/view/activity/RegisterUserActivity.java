@@ -18,7 +18,11 @@ package com.sitexa.android.community.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -31,6 +35,9 @@ import com.sitexa.android.community.internal.di.components.DaggerUserComponent;
 import com.sitexa.android.community.internal.di.components.UserComponent;
 import com.sitexa.android.community.navigation.UserNavigator;
 import com.sitexa.android.community.presenter.RegisterUserPresenter;
+import com.sitexa.android.community.utils.StringUtil;
+import com.sitexa.android.community.utils.SystemUtil;
+import com.sitexa.android.community.utils.ValidateUtil;
 import com.sitexa.android.community.view.RegisterUserView;
 
 import javax.inject.Inject;
@@ -57,12 +64,18 @@ public class RegisterUserActivity extends BaseActivity implements HasComponent<U
     EditText etUsername;
     @Bind(R.id.password)
     EditText etPassword;
+    @Bind(R.id.password2)
+    EditText etPassword2;
     @Bind(R.id.registerUserButton)
     Button btnRegisterUser;
     @Bind(R.id.readServiceCheckbox)
     CheckBox cbReadService;
     @Bind(R.id.serviceStatement)
     TextView tvServiceStatement;
+
+    private String phoneNumber = null;
+    private boolean phoneNumber_isNotNull, verifyCode_isNotNull, username_isNotNull, password_isNotNull;
+    private int resendSecond = 60;
 
     private UserComponent userComponent;
 
@@ -85,6 +98,10 @@ public class RegisterUserActivity extends BaseActivity implements HasComponent<U
 
         this.registerUserPresenter.setView(this);
         this.registerUserPresenter.initialize();
+
+        SystemUtil.showInputFromWindow(etMobileNo);
+
+        this.addTextChangedListener();
     }
 
     @Override
@@ -131,11 +148,165 @@ public class RegisterUserActivity extends BaseActivity implements HasComponent<U
     @OnClick(R.id.registerUserButton)
     @Override
     public void registerUser() {
+        String username = etUsername.getText().toString();
+        String password = etPassword.getText().toString();
+        String mobileNo = etMobileNo.getText().toString();
+        String verifyCode = etVerifyCode.getText().toString();
 
+        this.registerUserPresenter.doRegisterUser(mobileNo,verifyCode,username,password);
     }
 
     @Override
     public void navigateToLoginActivity() {
         this.userNavigator.navigateToUserLogin(this);
+    }
+
+    private void addTextChangedListener() {
+        this.etMobileNo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                phoneNumber = etMobileNo.getText().toString();
+                phoneNumber_isNotNull = true;
+                if (StringUtil.isEmpty(phoneNumber)) {
+                    btnGetVerifyCode.setTextColor(Color.GRAY);
+                    btnGetVerifyCode.setBackgroundResource(R.drawable.btn_white_selector);
+                    btnGetVerifyCode.setEnabled(false);
+                    phoneNumber_isNotNull = false;
+                    return;
+                }
+
+                if (!ValidateUtil.validateMobile(phoneNumber)) {
+                    btnGetVerifyCode.setTextColor(Color.GRAY);
+                    btnGetVerifyCode.setBackgroundResource(R.drawable.btn_white_selector);
+                    btnGetVerifyCode.setEnabled(false);
+                    phoneNumber_isNotNull = false;
+                    return;
+                }
+                btnGetVerifyCode.setTextColor(Color.WHITE);
+                btnGetVerifyCode.setBackgroundResource(R.drawable.btn_theme_color_selector);
+                btnGetVerifyCode.setEnabled(true);
+                updateRegisterBtn();
+            }
+        });
+
+        etVerifyCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String v = etVerifyCode.getText().toString();
+                if (StringUtil.isNotEmpty(v)) {
+                    verifyCode_isNotNull = true;
+                } else {
+                    verifyCode_isNotNull = false;
+                }
+                updateRegisterBtn();
+            }
+        });
+
+        etUsername.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String v = etUsername.getText().toString();
+                if (StringUtil.isNotEmpty(v)) {
+                    username_isNotNull = true;
+                } else {
+                    username_isNotNull = false;
+                }
+                updateRegisterBtn();
+            }
+        });
+
+        etPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String v = etPassword.getText().toString();
+                String v2 = etPassword2.getText().toString();
+                if (StringUtil.isNotEmpty(v) && StringUtil.isNotEmpty(v2) && v.equals(v2)) {
+                    password_isNotNull = true;
+                } else {
+                    password_isNotNull = false;
+                }
+                updateRegisterBtn();
+            }
+        });
+
+        etPassword2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String v = etPassword.getText().toString();
+                String v2 = etPassword2.getText().toString();
+                if (StringUtil.isNotEmpty(v) && StringUtil.isNotEmpty(v2) && v.equals(v2)) {
+                    password_isNotNull = true;
+                } else {
+                    password_isNotNull = false;
+                }
+                updateRegisterBtn();
+            }
+        });
+    }
+
+    private void updateRegisterBtn() {
+        if (phoneNumber_isNotNull && verifyCode_isNotNull && username_isNotNull && password_isNotNull) {
+            btnRegisterUser.setEnabled(true);
+        } else {
+            btnRegisterUser.setEnabled(false);
+        }
+    }
+
+    private void reGetVerifyCode() {
+        final Handler handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                btnGetVerifyCode.setText(String.format(getString(R.string.reGetVerifyCode), resendSecond));
+                resendSecond--;
+                if (resendSecond > 0) {
+                    handler.postDelayed(this, 1000);
+                    btnGetVerifyCode.setEnabled(false);
+                } else {
+                    btnGetVerifyCode.setText(getString(R.string.getVerifyCode));
+                    btnGetVerifyCode.setEnabled(true);
+                }
+            }
+        });
     }
 }

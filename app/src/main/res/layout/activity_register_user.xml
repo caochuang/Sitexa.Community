@@ -240,6 +240,56 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/bg_common_empty_white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_common_empty_white"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="8dp"
+            android:text="@string/password_again"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="0.5dip"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/bfbfbf" />
+
+
+        <com.sitexa.android.community.widget.ClearableEditText
+            android:id="@+id/password2"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_common_empty_white"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center_vertical"
+            android:hint="@string/please_enter_password_again"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:maxLength="30"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:textSize="14sp"
+            android:ems="10"
+            clear:right_drawable="@drawable/edit_text_clear"
+            clear:offset_y="5dp"
+            clear:touch_offset_x="10dp" />
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/registerUserButton"
         style="@style/ThemeButton"

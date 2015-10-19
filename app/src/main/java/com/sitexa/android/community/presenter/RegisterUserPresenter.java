@@ -103,13 +103,13 @@ public class RegisterUserPresenter implements Presenter {
         this.getVerifyCodeUC.execute(new GetVerifyCodeSubscriber(), params);
     }
 
-    public void doReadServiceStatement() {
+    @SuppressWarnings("unchecked")
+    public void doRegisterUser(String mobileNo,String verifyCode,String username,String password) {
         final Map params = new HashMap();
-        this.sendVerifyCodeUC.execute(new SendVerifyCodeSubscriber(), params);
-    }
-
-    public void doRegisterUser() {
-        final Map params = new HashMap();
+        params.put("mobileNo",mobileNo);
+        params.put("verifyCode",verifyCode);
+        params.put("username",username);
+        params.put("password",password);
         this.registerUserUC.execute(new RegisterUserSubscriber(), params);
     }
 
@@ -127,22 +127,6 @@ public class RegisterUserPresenter implements Presenter {
         @Override
         public void onNext(String result) {
             RegisterUserPresenter.this.sendVerifyCode();
-        }
-    }
-
-    private final class SendVerifyCodeSubscriber extends DefaultSubscriber<String> {
-        @Override
-        public void onCompleted() {
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            RegisterUserPresenter.this.showErrorMessage(new DefaultErrorBundle((Exception) e));
-        }
-
-        @Override
-        public void onNext(String result) {
-            RegisterUserPresenter.this.registerUser();
         }
     }
 

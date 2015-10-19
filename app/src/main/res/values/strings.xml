@@ -19,12 +19,14 @@
     <string name="password_enter_hint">password</string>
     <string name="please_enter_username">Please enter username</string>
     <string name="please_enter_password">Please enter password</string>
+    <string name="please_enter_password_again">Please enter password again</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="password_again"> Again </string>
+    <string name="password_again">Password again</string>
     <string name="setting_login_password_hint">password</string>
     <string name="setting_login_password_again_hint">password again</string>
     <string name="getVerifyCode">Get Verify Code</string>
+    <string name="reGetVerifyCode">Get Verify Code Again(%d)</string>
     <string name="sendVerifyCode">Send Verify Code</string>
     <string name="enter_mobile_no">Enter Mobile No</string>
     <string name="enter_verify_code">Enter Verify Code</string>

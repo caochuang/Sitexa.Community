@@ -38,6 +38,12 @@ public interface UserApi {
 
     String API_URL_USER_LOGIN = "/authority/doLogin";
 
+    String SEND_VERIFY_CODE_2_REGISTER = "/sms/sendVerifyCode2Register";
+
+    String SEND_VERIFY_CODE_2_USER = "/sms/sendVerifyCode2User";
+
+    String CHECK_VERIFICATION = "/sms/checkVerifyCode";
+
     /**
      * Retrieves an {@link Observable} which will emit a List of {@link UserEntity}.
      */
@@ -51,4 +57,6 @@ public interface UserApi {
     Observable<UserEntity> userEntityById(final long userId);
 
     Observable<UserEntity> userLogin(final Map<String, String> fields);
+
+    Observable<String> getVerifyCode(Map<String, String> param);
 }

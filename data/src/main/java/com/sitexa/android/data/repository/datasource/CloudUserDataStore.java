@@ -69,4 +69,9 @@ public class CloudUserDataStore implements UserDataStore {
     public Observable<UserEntity> userLogin(@NonNull Map<String, String> fields) {
         return userApi.userLogin(fields);
     }
+
+    @Override
+    public Observable<String> getVerifyCode(Map<String, String> param) {
+        return userApi.getVerifyCode(param);
+    }
 }

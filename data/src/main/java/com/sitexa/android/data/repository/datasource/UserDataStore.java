@@ -42,4 +42,5 @@ public interface UserDataStore {
 
     Observable<UserEntity> userLogin(@NonNull final Map<String, String> fields);
 
+    Observable<String> getVerifyCode(Map<String, String> param);
 }

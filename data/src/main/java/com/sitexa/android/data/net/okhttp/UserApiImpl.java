@@ -54,11 +54,12 @@ public class UserApiImpl implements UserApi {
         params.put("pageSize", "20");
         return Observable.create(subscriber -> {
             try {
-                String result = OkHttpApi.newInstance(this.context)
+                String json = OkHttpApi.newInstance(this.context)
                         .getRequest(API_URL_GET_USER_LIST, params)
                         .call();
+
                 ApiResult apiResult = new ApiResult();
-                apiResult.setValue(result);
+                apiResult.setValue(json);
                 List<UserEntity> entities = apiResult.getDomainList(new TypeToken<List<UserEntity>>() {
                 }.getType());
                 entities = reformImageUrl(entities);
@@ -77,11 +78,11 @@ public class UserApiImpl implements UserApi {
         params.put("userId", String.valueOf(userId));
         return Observable.create(subscriber -> {
             try {
-                String result = OkHttpApi.newInstance(this.context)
+                String json = OkHttpApi.newInstance(this.context)
                         .getRequest(API_URL_GET_USER_DETAILS, params)
                         .call();
                 ApiResult apiResult = new ApiResult();
-                apiResult.setValue(result);
+                apiResult.setValue(json);
                 UserEntity entity = apiResult.getDomain(UserEntity.class);
                 entity = reformImageUrl(entity);
                 subscriber.onNext(entity);
@@ -95,17 +96,32 @@ public class UserApiImpl implements UserApi {
     @Override
     public Observable<UserEntity> userLogin(Map<String, String> fields) {
         return Observable.create(subscriber -> {
-            try{
-                String result = OkHttpApi.newInstance(this.context)
-                        .getRequest(API_URL_USER_LOGIN,fields)
+            try {
+                String json = OkHttpApi.newInstance(this.context)
+                        .getRequest(API_URL_USER_LOGIN, fields)
                         .call();
                 ApiResult apiResult = new ApiResult();
-                apiResult.setValue(result);
+                apiResult.setValue(json);
                 UserEntity entity = apiResult.getDomain(UserEntity.class);
                 entity = reformImageUrl(entity);
                 subscriber.onNext(entity);
                 subscriber.onCompleted();
-            }catch (Exception e){
+            } catch (Exception e) {
+                subscriber.onError(e);
+            }
+        });
+    }
+
+    @Override
+    public Observable<String> getVerifyCode(Map<String, String> param) {
+        return Observable.create(subscriber -> {
+            try {
+                String json = OkHttpApi.newInstance(this.context)
+                        .getRequest(SEND_VERIFY_CODE_2_REGISTER, param)
+                        .call();
+                subscriber.onNext(json);
+                subscriber.onCompleted();
+            } catch (Exception e) {
                 subscriber.onError(e);
             }
         });

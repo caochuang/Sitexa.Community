@@ -57,7 +57,6 @@ public class RegisterUserPresenter implements Presenter {
     }
 
     public void initialize() {
-        this.getVerifyCode();
     }
 
     //////////Presenter//////////
@@ -82,15 +81,16 @@ public class RegisterUserPresenter implements Presenter {
     private void showErrorMessage(ErrorBundle errorBundle) {
         RegisterUserActivity aActivity = (RegisterUserActivity) this.registerUserView;
         String errorMessage = ErrorMessageFactory.create(aActivity, errorBundle.getException());
-        this.registerUserView.showError(errorMessage);
+        this.registerUserView.showMessage(errorMessage);
     }
 
-    private void getVerifyCode() {
-
+    private void showMessage(String message) {
+        this.registerUserView.showMessage(message);
     }
 
-    private void sendVerifyCode() {
 
+    private void inputVerifyCode() {
+        this.registerUserView.inputVerifyCode();
     }
 
     private void registerUser() {
@@ -98,18 +98,19 @@ public class RegisterUserPresenter implements Presenter {
     }
 
     //////////for Model//////////
-    public void doGetVerifyCode() {
+    public void doGetVerifyCode(String phoneNumber) {
         final Map params = new HashMap();
+        params.put("phoneNumber",phoneNumber);
         this.getVerifyCodeUC.execute(new GetVerifyCodeSubscriber(), params);
     }
 
     @SuppressWarnings("unchecked")
-    public void doRegisterUser(String mobileNo,String verifyCode,String username,String password) {
+    public void doRegisterUser(String mobileNo, String verifyCode, String username, String password) {
         final Map params = new HashMap();
-        params.put("mobileNo",mobileNo);
-        params.put("verifyCode",verifyCode);
-        params.put("username",username);
-        params.put("password",password);
+        params.put("mobileNo", mobileNo);
+        params.put("verifyCode", verifyCode);
+        params.put("username", username);
+        params.put("password", password);
         this.registerUserUC.execute(new RegisterUserSubscriber(), params);
     }
 
@@ -126,7 +127,10 @@ public class RegisterUserPresenter implements Presenter {
 
         @Override
         public void onNext(String result) {
-            RegisterUserPresenter.this.sendVerifyCode();
+            if ("00000".equals(result))
+                RegisterUserPresenter.this.inputVerifyCode();
+            else
+                RegisterUserPresenter.this.showMessage(result);
         }
     }
 

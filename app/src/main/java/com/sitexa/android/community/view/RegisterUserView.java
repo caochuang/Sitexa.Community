@@ -29,5 +29,8 @@ public interface RegisterUserView {
 
     void navigateToLoginActivity();
 
-    void showError(String message);
+    void showMessage(String message);
+
+    void inputVerifyCode();
+
 }

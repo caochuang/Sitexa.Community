@@ -98,10 +98,10 @@ public class RegisterUserActivity extends BaseActivity implements HasComponent<U
 
         this.registerUserPresenter.setView(this);
         this.registerUserPresenter.initialize();
+        this.addTextChangedListener();
 
         SystemUtil.showInputFromWindow(etMobileNo);
 
-        this.addTextChangedListener();
     }
 
     @Override
@@ -129,14 +129,22 @@ public class RegisterUserActivity extends BaseActivity implements HasComponent<U
     }
 
     @Override
-    public void showError(String message) {
+    public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.getVerifyCodeButton)
     @Override
     public void getVerifyCode() {
-        this.registerUserPresenter.doGetVerifyCode();
+        String phoneNumber = etMobileNo.getText().toString();
+        this.registerUserPresenter.doGetVerifyCode(phoneNumber);
+        this.resendSecond = 60;
+    }
+
+    @Override
+    public void inputVerifyCode(){
+        this.showMessage("VerifyCode have been send to your mobile phone.");
+        this.reGetVerifyCode();
     }
 
     @OnClick(R.id.serviceStatement)

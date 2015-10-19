@@ -81,11 +81,11 @@ public class UserDataRepository implements UserRepository {
 
     @Override
     public Observable<String> getVerifyCode(Map<String, String> param) {
-        Observable<String> myObservable = Observable.just("true");
+        Observable<String> myObservable = Observable.just("00000");
         return myObservable;
 
         //final UserDataStore userDataStore = this.userDataStoreFactory.createCloudDataStore();
-        //return userDataStore.getVerifyCode(fields);
+        //return userDataStore.getVerifyCode(param);
     }
 
     @Override

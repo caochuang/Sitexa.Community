@@ -18,7 +18,6 @@ package com.sitexa.android.community.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Window;
 
 import com.sitexa.android.community.R;
 import com.sitexa.android.community.internal.di.HasComponent;
@@ -50,7 +49,6 @@ public class UserDetailsActivity extends BaseActivity implements HasComponent<Us
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_user_details);
 
         if (savedInstanceState == null) {

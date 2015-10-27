@@ -19,10 +19,10 @@ package com.sitexa.android.community.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Window;
 
 import com.sitexa.android.community.R;
 import com.sitexa.android.community.internal.di.HasComponent;
+import com.sitexa.android.community.internal.di.components.DaggerApplicationComponent;
 import com.sitexa.android.community.internal.di.components.DaggerUserComponent;
 import com.sitexa.android.community.internal.di.components.UserComponent;
 import com.sitexa.android.community.model.UserModel;

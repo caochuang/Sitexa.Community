@@ -106,6 +106,7 @@
     <orderEntry type="library" exported="" name="okhttp-2.5.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-library-1.1" level="project" />
     <orderEntry type="library" exported="" name="retrofit-1.9.0" level="project" />
+    <orderEntry type="library" exported="" name="httpclientandroidlib-4.3.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-integration-1.1" level="project" />
     <orderEntry type="library" exported="" name="commons-lang3-3.3" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="dexmaker-mockito-1.0" level="project" />
@@ -115,6 +116,7 @@
     <orderEntry type="library" exported="" name="support-annotations-23.0.0" level="project" />
     <orderEntry type="library" exported="" name="library-1.0.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="objenesis-1.0" level="project" />
+    <orderEntry type="library" exported="" name="recorderlibrary" level="project" />
     <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="javax.annotation-api-1.2" level="project" />
     <orderEntry type="library" exported="" name="javax.inject-1" level="project" />

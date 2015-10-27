@@ -29,6 +29,7 @@ import android.widget.RelativeLayout;
 import com.sitexa.android.community.AndroidApplication;
 import com.sitexa.android.community.R;
 import com.sitexa.android.community.internal.di.components.UserComponent;
+import com.sitexa.android.community.model.AppInfo;
 import com.sitexa.android.community.model.UserModel;
 import com.sitexa.android.community.presenter.LoginPresenter;
 import com.sitexa.android.community.utils.AnimationUtil;
@@ -175,9 +176,13 @@ public class UserLoginFragment extends BaseFragment implements UserLoginView {
     @OnClick(R.id.do_login)
     void onButtonDoLoginClick() {
 
+        Context ctx = getContext();
+
+        Context ctx2 = ((AndroidApplication) getContext()).getApplicationComponent().context();
+
         String username = this.et_username.getText().toString();
         String password = this.et_password.getText().toString();
-        String imei = AndroidApplication.deviceId;
+        String imei = AppInfo.deviceId;
         String userAgent = SystemUtil.getUserAgent();
 
         if (StringUtil.isEmpty(username)) {

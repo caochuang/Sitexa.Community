@@ -93,8 +93,9 @@ public class RegisterUserPresenter implements Presenter {
         this.registerUserView.inputVerifyCode();
     }
 
-    private void registerUser() {
-
+    private void finishRegister(String msg) {
+        this.showMessage(msg);
+        this.registerUserView.navigateToLoginActivity();
     }
 
     //////////for Model//////////
@@ -143,12 +144,12 @@ public class RegisterUserPresenter implements Presenter {
 
         @Override
         public void onError(Throwable e) {
-            super.onError(e);
+            RegisterUserPresenter.this.showErrorMessage(new DefaultErrorBundle((Exception) e));
         }
 
         @Override
-        public void onNext(String s) {
-            super.onNext(s);
+        public void onNext(String msg) {
+            RegisterUserPresenter.this.finishRegister(msg);
         }
     }
 }

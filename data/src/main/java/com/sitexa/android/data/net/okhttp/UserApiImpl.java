@@ -127,6 +127,21 @@ public class UserApiImpl implements UserApi {
         });
     }
 
+    @Override
+    public Observable<String> registerUser(Map<String, String> param) {
+        return Observable.create(subscriber -> {
+            try {
+                String json = OkHttpApi.newInstance(this.context)
+                        .postRequest(REGISTER_USER_BY_MOBILE_NO, param)
+                        .call();
+                subscriber.onNext(json);
+                subscriber.onCompleted();
+            } catch (Exception e) {
+                subscriber.onError(e);
+            }
+        });
+    }
+
     private UserEntity reformImageUrl(UserEntity userEntity) {
         String imgUrl = userEntity.getCoverImagePath();
         if (imgUrl != null && !"".equals(imgUrl))

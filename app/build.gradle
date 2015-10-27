@@ -60,10 +60,8 @@ android {
 dependencies {
     def presentationDependencies = rootProject.ext.presentationDependencies
     def presentationTestDependencies = rootProject.ext.presentationTestDependencies
-
     compile project(':domain')
     compile project(':data')
-
     apt presentationDependencies.daggerCompiler
     compile presentationDependencies.dagger
     compile presentationDependencies.butterKnife
@@ -73,11 +71,13 @@ dependencies {
     //compile presentationDependencies.rxJavaAndroid
     compile presentationDependencies.circleImageView
     compile presentationDependencies.swipebacklayout
+    compile presentationDependencies.httpclientandroidlib
     provided presentationDependencies.javaxAnnotation
-
     androidTestCompile presentationTestDependencies.mockito
     androidTestCompile presentationTestDependencies.dexmaker
     androidTestCompile presentationTestDependencies.dexmakerMockito
     androidTestCompile presentationTestDependencies.espresso
     androidTestCompile presentationTestDependencies.testingSupportLib
+    compile files('libs/recorderlibrary.jar')
+    //compile files('libs/commons-codec-1.6.jar')
 }

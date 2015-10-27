@@ -26,7 +26,8 @@
     <string name="setting_login_password_hint">password</string>
     <string name="setting_login_password_again_hint">password again</string>
     <string name="getVerifyCode">Get Verify Code</string>
-    <string name="reGetVerifyCode">Get Verify Code Again(%d)</string>
+    <string name="resendSecond">%d</string>
+    <string name="reGetVerifyCode">Get Verify Code Again</string>
     <string name="sendVerifyCode">Send Verify Code</string>
     <string name="enter_mobile_no">Enter Mobile No</string>
     <string name="enter_verify_code">Enter Verify Code</string>
@@ -35,6 +36,12 @@
     <string name="set_password">Set Password</string>
     <string name="read_and_agree">Read and agree with</string>
     <string name="service_statement">service statement</string>
+
+    <string name="message_sending">正在发送中...</string>
+    <string name="uploading_sending_progress">上传进度:%1$d%%</string>
+    <string name="message_sent_successfully">发送成功!</string>
+    <string name="message_sent_failed">发送失败!</string>
+
 
 
     ////////////////////////////////////////////////////////////

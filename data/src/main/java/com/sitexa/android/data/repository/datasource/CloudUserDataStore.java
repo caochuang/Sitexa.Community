@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
+import rx.Observer;
+import rx.Subscriber;
 import rx.functions.Action1;
 
 /**
@@ -73,5 +75,23 @@ public class CloudUserDataStore implements UserDataStore {
     @Override
     public Observable<String> getVerifyCode(Map<String, String> param) {
         return userApi.getVerifyCode(param);
+    }
+
+    @Override
+    public Observable<String> registerUser(Map<String, String> param) {
+        //return userApi.registerUser(param);
+        return Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                final String s = "y";
+                if (s.equals("x")) {
+                    String result = "success";
+                    subscriber.onCompleted();
+                    subscriber.onNext(result);
+                } else {
+                    subscriber.onError(new Throwable(new Exception("error")));
+                }
+            }
+        });
     }
 }

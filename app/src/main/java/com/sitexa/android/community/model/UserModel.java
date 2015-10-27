@@ -16,6 +16,7 @@
 package com.sitexa.android.community.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Class that represents a user in the presentation layer.
@@ -24,7 +25,6 @@ public class UserModel {
 
     private final long userId;
     private String Username;
-    private String Password;
     private String CoverImagePath;
     private String Signature;
     private String Status;
@@ -35,8 +35,6 @@ public class UserModel {
     private String WeiboNo;
     private String SiteID;
     private String SiteName;
-    private long CommunityID;
-    private String CommunityName;
     private String Gender;
     private Date Birthday;
     private Date RegisterDate;
@@ -45,11 +43,10 @@ public class UserModel {
     private String HeadIcon;
     private boolean AuditFlag;
     private boolean DeleteFlag;
-    private String EncryptKey;
-    private String EncryptedLoginStr;
-    private String IMEI;
     private String Role;
-
+    private SiteModel site;
+    private CommunityModel mainCommunity;
+    private List<CommunityModel> communities;
 
     public UserModel(long userId) {
         this.userId = userId;
@@ -65,14 +62,6 @@ public class UserModel {
 
     public void setUsername(String username) {
         Username = username;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
     }
 
     public String getCoverImagePath() {
@@ -155,22 +144,6 @@ public class UserModel {
         SiteName = siteName;
     }
 
-    public long getCommunityID() {
-        return CommunityID;
-    }
-
-    public void setCommunityID(long communityID) {
-        CommunityID = communityID;
-    }
-
-    public String getCommunityName() {
-        return CommunityName;
-    }
-
-    public void setCommunityName(String communityName) {
-        CommunityName = communityName;
-    }
-
     public String getGender() {
         return Gender;
     }
@@ -235,30 +208,6 @@ public class UserModel {
         DeleteFlag = deleteFlag;
     }
 
-    public String getEncryptKey() {
-        return EncryptKey;
-    }
-
-    public void setEncryptKey(String encryptKey) {
-        EncryptKey = encryptKey;
-    }
-
-    public String getEncryptedLoginStr() {
-        return EncryptedLoginStr;
-    }
-
-    public void setEncryptedLoginStr(String encryptedLoginStr) {
-        EncryptedLoginStr = encryptedLoginStr;
-    }
-
-    public String getIMEI() {
-        return IMEI;
-    }
-
-    public void setIMEI(String IMEI) {
-        this.IMEI = IMEI;
-    }
-
     public String getRole() {
         return Role;
     }
@@ -267,12 +216,35 @@ public class UserModel {
         Role = role;
     }
 
+    public SiteModel getSite() {
+        return site;
+    }
+
+    public void setSite(SiteModel site) {
+        this.site = site;
+    }
+
+    public List<CommunityModel> getCommunities() {
+        return communities;
+    }
+
+    public void setCommunities(List<CommunityModel> communities) {
+        this.communities = communities;
+    }
+
+    public CommunityModel getMainCommunity() {
+        return mainCommunity;
+    }
+
+    public void setMainCommunity(CommunityModel mainCommunity) {
+        this.mainCommunity = mainCommunity;
+    }
+
     @Override
     public String toString() {
         return "UserModel{" +
                 "userId=" + userId +
                 ", Username='" + Username + '\'' +
-                ", Password='" + Password + '\'' +
                 ", CoverImagePath='" + CoverImagePath + '\'' +
                 ", Signature='" + Signature + '\'' +
                 ", Status='" + Status + '\'' +
@@ -283,8 +255,6 @@ public class UserModel {
                 ", WeiboNo='" + WeiboNo + '\'' +
                 ", SiteID='" + SiteID + '\'' +
                 ", SiteName='" + SiteName + '\'' +
-                ", CommunityID=" + CommunityID +
-                ", CommunityName='" + CommunityName + '\'' +
                 ", Gender='" + Gender + '\'' +
                 ", Birthday='" + Birthday + '\'' +
                 ", RegisterDate='" + RegisterDate + '\'' +
@@ -293,9 +263,6 @@ public class UserModel {
                 ", HeadIcon='" + HeadIcon + '\'' +
                 ", AuditFlag=" + AuditFlag +
                 ", DeleteFlag=" + DeleteFlag +
-                ", EncryptKey='" + EncryptKey + '\'' +
-                ", EncryptedLoginStr='" + EncryptedLoginStr + '\'' +
-                ", IMEI='" + IMEI + '\'' +
                 ", Role='" + Role + '\'' +
                 '}';
     }

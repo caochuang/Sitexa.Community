@@ -43,6 +43,9 @@ public class Community {
     private String auditflag;
     private boolean deleteflag;
 
+    public Community() {
+    }
+
     public Community(long communityid) {
         this.communityid = communityid;
     }

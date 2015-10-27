@@ -155,8 +155,8 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
             this.iv_cover.setImageUrl(user.getHeadIcon());
             this.tv_fullname.setText(user.getUsername());
             this.tv_email.setText(user.getMobileNo());
-            this.tv_followers.setText(String.valueOf(user.getCommunityID()));
-            this.tv_description.setText(user.getCommunityName());
+            this.tv_followers.setText(String.valueOf(user.getMainCommunity().getCommunityId()));
+            this.tv_description.setText(user.getMainCommunity().getCommunityName());
         }
     }
 

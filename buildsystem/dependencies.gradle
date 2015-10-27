@@ -25,6 +25,7 @@ ext {
     circleImageViewVersion = '1.3.0'
     rxJavaAndroidVersion = '0.20.7'
     swipebacklayoutVersion = '1.0.0'
+    httpclientandroidlibVersion = '4.3.0'
 
     //Testing
     robolectricVersion = '3.0'
@@ -47,6 +48,7 @@ ext {
             circleImageView: "de.hdodenhof:circleimageview:${circleImageViewVersion}",
             //rxJavaAndroid  : "com.netflix.rxjava:rxjava-android:${rxJavaAndroidVersion}",
             swipebacklayout : "me.imid.swipebacklayout.lib:library:${swipebacklayoutVersion}",
+            httpclientandroidlib: "com.belladati:httpclientandroidlib:${httpclientandroidlibVersion}",
     ]
 
     presentationTestDependencies = [

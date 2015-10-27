@@ -24,25 +24,21 @@ import android.util.Log;
 import com.sitexa.android.community.internal.di.components.ApplicationComponent;
 import com.sitexa.android.community.internal.di.components.DaggerApplicationComponent;
 import com.sitexa.android.community.internal.di.modules.ApplicationModule;
+import com.sitexa.android.community.model.AppInfo;
 
-/**
- * Android Main Application
- */
 public class AndroidApplication extends Application {
 
-    protected static final String TAG = "[AndroidApplication]";
-    public static int versionCode;
-    public static String versionName;
-    public static String packageName;
-    public static PackageInfo packageInfo;
-    public static String deviceId;
+    protected static final String TAG = AndroidApplication.class.getCanonicalName();
+
     private ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
         this.initializeInjector();
-
+        //todo...uncomment next lines
+        //UncaughtExceptionHandler instance = UncaughtExceptionHandler.getInstance();
+        //instance.initialization(getApplicationContext());
         initAppInfo();
     }
 
@@ -59,11 +55,11 @@ public class AndroidApplication extends Application {
     private void initAppInfo() {
         try {
             PackageManager pm = getPackageManager();
-            packageInfo = pm.getPackageInfo(getPackageName(), 0);
-            packageName = packageInfo.packageName;
-            versionCode = packageInfo.versionCode;
-            versionName = packageInfo.versionName;
-            deviceId = ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).getDeviceId();
+            PackageInfo packageInfo = pm.getPackageInfo(getPackageName(), 0);
+            AppInfo.packageName = packageInfo.packageName;
+            AppInfo.versionCode = packageInfo.versionCode;
+            AppInfo.versionName = packageInfo.versionName;
+            AppInfo.deviceId = ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).getDeviceId();
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, e.getMessage(), e);
         }

@@ -106,9 +106,9 @@ public class UserDataRepository implements UserRepository {
 
     @Override
     public Observable<String> registerUser(Map<String, String> param) {
-        Observable<String> myObservable = Observable.just("true");
-        return myObservable;
-        //final UserDataStore userDataStore = this.userDataStoreFactory.createCloudDataStore();
-        //return userDataStore.registerUser(fields);
+        //Observable<String> myObservable = Observable.just("successful");
+        //return myObservable;
+        final UserDataStore userDataStore = this.userDataStoreFactory.createCloudDataStore();
+        return userDataStore.registerUser(param);
     }
 }

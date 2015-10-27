@@ -45,7 +45,6 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
 
 public class RegisterUserActivity extends BaseActivity implements HasComponent<UserComponent>, RegisterUserView {
 
@@ -305,13 +304,13 @@ public class RegisterUserActivity extends BaseActivity implements HasComponent<U
         handler.post(new Runnable() {
             @Override
             public void run() {
-                btnGetVerifyCode.setText(String.format(getString(R.string.reGetVerifyCode), resendSecond));
+                btnGetVerifyCode.setText(String.format(getString(R.string.resendSecond), resendSecond));
                 resendSecond--;
                 if (resendSecond > 0) {
                     handler.postDelayed(this, 1000);
                     btnGetVerifyCode.setEnabled(false);
                 } else {
-                    btnGetVerifyCode.setText(getString(R.string.getVerifyCode));
+                    btnGetVerifyCode.setText(getString(R.string.reGetVerifyCode));
                     btnGetVerifyCode.setEnabled(true);
                 }
             }

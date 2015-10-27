@@ -44,6 +44,8 @@ public interface UserApi {
 
     String CHECK_VERIFICATION = "/sms/checkVerifyCode";
 
+    String REGISTER_USER_BY_MOBILE_NO = "/register/registerByMobile";
+
     /**
      * Retrieves an {@link Observable} which will emit a List of {@link UserEntity}.
      */
@@ -59,4 +61,6 @@ public interface UserApi {
     Observable<UserEntity> userLogin(final Map<String, String> fields);
 
     Observable<String> getVerifyCode(Map<String, String> param);
+
+    Observable<String> registerUser(Map<String, String> param);
 }

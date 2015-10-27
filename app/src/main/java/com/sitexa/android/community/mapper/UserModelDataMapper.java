@@ -51,18 +51,12 @@ public class UserModelDataMapper {
             UserModel userModel = new UserModel(user.getUserId());
             userModel.setAuditFlag(user.isAuditFlag());
             userModel.setBirthday(user.getBirthday());
-            userModel.setCommunityID(user.getCommunityId());
-            userModel.setCommunityName(user.getCommunityName());
             userModel.setCoverImagePath(user.getCoverImagePath());
             userModel.setDeleteFlag(user.isDeleteFlag());
             userModel.setEmail(user.getEmail());
-            userModel.setEncryptedLoginStr(user.getEncryptedLoginStr());
-            userModel.setEncryptKey(user.getEncryptKey());
             userModel.setGender(user.getGender());
             userModel.setHeadIcon(user.getHeadIcon());
-            userModel.setIMEI(user.getIMEI());
             userModel.setMobileNo(user.getMobileNo());
-            userModel.setPassword(user.getPassword());
             userModel.setQQNo(user.getQqno());
             userModel.setQRCode(user.getQrcode());
             userModel.setQRCodePath(user.getQrcodePath());

@@ -61,4 +61,9 @@ public class DiskUserDataStore implements UserDataStore {
     public Observable<String> getVerifyCode(Map<String, String> param) {
         throw new UnsupportedOperationException("Operation is not available!!!");
     }
+
+    @Override
+    public Observable<String> registerUser(Map<String, String> param) {
+        throw new UnsupportedOperationException("Operation is not available!!!");
+    }
 }

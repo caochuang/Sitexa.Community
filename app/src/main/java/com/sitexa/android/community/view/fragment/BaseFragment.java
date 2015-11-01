@@ -39,6 +39,11 @@ public abstract class BaseFragment extends Fragment {
         setRetainInstance(true);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
     /**
      * Shows a {@link android.widget.Toast} message.
      *
